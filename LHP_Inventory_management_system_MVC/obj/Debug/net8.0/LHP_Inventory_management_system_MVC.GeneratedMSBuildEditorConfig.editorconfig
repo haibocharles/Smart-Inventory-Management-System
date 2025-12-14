@@ -1,0 +1,93 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = LHP_Inventory_management_system_MVC
+build_property.RootNamespace = LHP_Inventory_management_system_MVC
+build_property.ProjectDir = D:\C# 學習成果\LHP_Inventory_management_system_mvc\LHP_Inventory_management_system_MVC\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\C# 學習成果\LHP_Inventory_management_system_mvc\LHP_Inventory_management_system_MVC
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 
+
+[D:/C\# 學習成果/LHP_Inventory_management_system_mvc/LHP_Inventory_management_system_MVC/Views/Account/Change_Password - 复制.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDaGFuZ2VfUGFzc3dvcmQgLSDlpI3liLYuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/C\# 學習成果/LHP_Inventory_management_system_mvc/LHP_Inventory_management_system_MVC/Views/Account/Change_Password.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDaGFuZ2VfUGFzc3dvcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/C\# 學習成果/LHP_Inventory_management_system_mvc/LHP_Inventory_management_system_MVC/Views/Account/Edit_Profile - 复制.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxFZGl0X1Byb2ZpbGUgLSDlpI3liLYuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/C\# 學習成果/LHP_Inventory_management_system_mvc/LHP_Inventory_management_system_MVC/Views/Account/Edit_Profile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxFZGl0X1Byb2ZpbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/C\# 學習成果/LHP_Inventory_management_system_mvc/LHP_Inventory_management_system_MVC/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/C\# 學習成果/LHP_Inventory_management_system_mvc/LHP_Inventory_management_system_MVC/Views/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/C\# 學習成果/LHP_Inventory_management_system_mvc/LHP_Inventory_management_system_MVC/Views/Home/DashBoard - 复制.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEYXNoQm9hcmQgLSDlpI3liLYuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/C\# 學習成果/LHP_Inventory_management_system_mvc/LHP_Inventory_management_system_MVC/Views/Home/DashBoard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEYXNoQm9hcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/C\# 學習成果/LHP_Inventory_management_system_mvc/LHP_Inventory_management_system_MVC/Views/Home/Inbound_Outbound - 复制.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmJvdW5kX091dGJvdW5kIC0g5aSN5Yi2LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/C\# 學習成果/LHP_Inventory_management_system_mvc/LHP_Inventory_management_system_MVC/Views/Home/Inbound_Outbound.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmJvdW5kX091dGJvdW5kLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/C\# 學習成果/LHP_Inventory_management_system_mvc/LHP_Inventory_management_system_MVC/Views/Home/Index - 复制.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleCAtIOWkjeWIti5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/C\# 學習成果/LHP_Inventory_management_system_mvc/LHP_Inventory_management_system_MVC/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/C\# 學習成果/LHP_Inventory_management_system_mvc/LHP_Inventory_management_system_MVC/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/C\# 學習成果/LHP_Inventory_management_system_mvc/LHP_Inventory_management_system_MVC/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/C\# 學習成果/LHP_Inventory_management_system_mvc/LHP_Inventory_management_system_MVC/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/C\# 學習成果/LHP_Inventory_management_system_mvc/LHP_Inventory_management_system_MVC/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/C\# 學習成果/LHP_Inventory_management_system_mvc/LHP_Inventory_management_system_MVC/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/C\# 學習成果/LHP_Inventory_management_system_mvc/LHP_Inventory_management_system_MVC/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-uqnctyhtsj

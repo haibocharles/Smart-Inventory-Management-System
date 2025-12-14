@@ -1,0 +1,517 @@
+﻿
+@model LHP_Inventory_management_system_MVC.Models.EditProfileViewModel
+@{
+    ViewData["Title"] = "Edit Profile - Inventory System";
+    Layout = null;  // 添加這行來禁用佈局
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        :root {
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            /* 淺色系高級配色 */
+            --bg-body: #f8fafc; /* 極淺灰藍 */
+            --bg-card: #ffffff;
+            --primary: #4f46e5; /* Indigo 600 - 專業感強的主色 */
+            --primary-light: #eef2ff;
+            --text-dark: #0f172a; /* Slate 900 - 接近黑色的深藍 */
+            --text-secondary: #64748b; /* Slate 500 */
+            /* 狀態色 */
+            --success-bg: #ecfdf5;
+            --success-text: #059669;
+            --danger-bg: #fef2f2;
+            --danger-text: #dc2626;
+            --warning-bg: #fffbeb;
+            --warning-text: #d97706;
+            /* 高級感陰影 (Soft & Deep) */
+            --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
+            --shadow-navbar: 0 4px 20px rgba(0,0,0,0.02);
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            min-height: 100vh;
+            padding-bottom: 40px;
+            /* 背景裝飾：極淡的漸層光暈 */
+            background-image: radial-gradient(circle at 0% 0%, #f1f5f9 0%, transparent 50%), radial-gradient(circle at 100% 0%, #e0e7ff 0%, transparent 30%);
+            background-attachment: fixed;
+        }
+
+        /* --- 導航欄 (懸浮白條) --- */
+        .navbar-premium {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.03);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-navbar);
+        }
+
+        .nav-link-custom {
+            color: var(--text-secondary);
+            font-weight: 600;
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            margin: 0 4px;
+        }
+
+            .nav-link-custom:hover, .nav-link-custom.active {
+                background-color: var(--primary-light);
+                color: var(--primary);
+            }
+
+        /* --- 卡片通用樣式 (Clean & Float) --- */
+        .premium-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid #f1f5f9; /* 極細邊框 */
+            padding: 1.75rem;
+            box-shadow: var(--shadow-card);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .premium-card:hover {
+                transform: translateY(-5px);
+                box-shadow: var(--shadow-hover);
+                border-color: #e2e8f0;
+            }
+
+        /* --- 歡迎區塊 (簡潔大氣) --- */
+        .welcome-header {
+            margin: 2.5rem 0;
+            padding: 0 1rem;
+        }
+
+        .welcome-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            letter-spacing: -0.5px;
+        }
+
+        .welcome-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        /* --- 內容區塊標題 --- */
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- 表單樣式 --- */
+        .form-input-premium {
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            background-color: #f8fafc;
+        }
+
+            .form-input-premium:focus {
+                border-color: var(--primary);
+                box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+            }
+
+            .form-input-premium[readonly] {
+                background-color: #e2e8f0;
+                cursor: not-allowed;
+            }
+
+        .form-select-premium {
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 0.5rem 2rem 0.5rem 1rem;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            background-color: #f8fafc;
+            cursor: pointer;
+        }
+
+            .form-select-premium:focus {
+                border-color: var(--primary);
+                box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+            }
+
+        /* --- 按鈕樣式 --- */
+        .btn-primary-glow {
+            background: var(--primary);
+            border: none;
+            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.4);
+            transition: 0.3s;
+        }
+
+            .btn-primary-glow:hover {
+                background: #4338ca;
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(79, 70, 229, 0.6);
+            }
+
+        .btn-secondary-glow {
+            background: #6b7280;
+            border: none;
+            color: white;
+            box-shadow: 0 4px 14px rgba(107, 114, 128, 0.2);
+            transition: 0.3s;
+        }
+
+            .btn-secondary-glow:hover {
+                background: #4b5563;
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(107, 114, 128, 0.3);
+            }
+
+        /* --- 頭像樣式 --- */
+        .avatar-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        /* --- 警報樣式 --- */
+        .alert-premium {
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+            .alert-premium.success {
+                background: var(--success-bg);
+                color: var(--success-text);
+                border: 1px solid var(--success-text);
+            }
+
+            .alert-premium.danger {
+                background: var(--danger-bg);
+                color: var(--danger-text);
+                border: 1px solid var(--danger-text);
+            }
+
+        /* 滾動條美化 */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #94a3b8;
+            }
+
+        .premium-card, .navbar-premium {
+            overflow: visible !important;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-premium">
+        <div class="container-fluid" style="max-width: 1400px;">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+                <div style="width: 32px; height: 32px; background: var(--primary); border-radius: 8px; display:flex; align-items:center; justify-content:center; color:white;">
+                    <i class="fas fa-cube fa-sm"></i>
+                </div>
+                <span style="font-weight: 800; font-size: 1.2rem; color: var(--text-dark); letter-spacing: -0.5px;">IMS</span>
+            </a>
+
+            <div class="collapse navbar-collapse ms-4" id="navbarNav">
+                <ul class="navbar-nav gap-2">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" href="#" onclick="goToMainPage()">
+                            <i class="fas fa-chart-pie me-2"></i>Main page
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" href="#" onclick="goToDashboard()">
+                            <i class="fas fa-chart-pie me-2"></i>Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" href="#" onclick="goToInventoryManagement()">
+                            <i class="fas fa-box me-2"></i>Inventory Management
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" href="#" onclick="goToReports()">
+                            <i class="fas fa-file-alt me-2"></i>Reports
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" href="#" onclick="goToReports()">
+                            <i class="fas fa-file-alt me-2"></i>Supplier
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 用戶菜單 -->
+            <div class="dropdown ms-auto">
+                <a class="d-flex align-items-center text-decoration-none dropdown-toggle"
+                   id="userDropdown"
+                   data-bs-toggle="dropdown"
+                   aria-expanded="false"
+                   style="cursor: pointer;">
+                    <img src="~/images/default-avatar.jpg"
+                         alt="Avatar"
+                         class="rounded-circle me-2"
+                         width="42" height="42">
+                    <div class="text-start">
+                        <div class="fw-bold" style="font-size: 0.95rem;">@User.Identity?.Name</div>
+                        <div class="text-secondary small">Administrator</div>
+                    </div>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2" aria-labelledby="userDropdown">
+                    <li>
+                        <a class="dropdown-item py-2" href="javascript:void(0)" onclick="goToEditProfile()">
+                            <i class="fas fa-user-gear me-2"></i> Edit Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item py-2" href="javascript:void(0)" onclick="goToChangePassword()">
+                            <i class="fas fa-key me-2"></i> Change Password
+                        </a>
+                    </li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <a class="dropdown-item py-2 text-danger" href="javascript:void(0)" onclick="logout()">
+                            <i class="fas fa-right-from-bracket me-2"></i> Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid" style="max-width: 1400px;">
+
+        <div class="d-flex flex-wrap justify-content-between align-items-end welcome-header">
+            <div>
+                <h1 class="welcome-title">Edit Profile</h1>
+                <p class="welcome-subtitle">Update your personal information below.</p>
+            </div>
+        </div>
+
+        <div class="row g-4 mb-5">
+            <div class="col-12">
+                <div class="premium-card">
+                    <!-- 顯示成功/錯誤消息 -->
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="alert-premium success alert">
+                            @TempData["SuccessMessage"]
+                        </div>
+                    }
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <div class="alert-premium danger alert">
+                            @TempData["ErrorMessage"]
+                        </div>
+                    }
+
+                    <div class="row g-4">
+                        <div class="col-md-3 text-center">
+                            <!-- 顯示當前照片 -->
+                            @if (!string.IsNullOrEmpty(Model.Photo))
+                            {
+                                <img src="@Model.Photo" class="avatar-img" alt="User avatar">
+                            }
+                            else
+                            {
+                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="avatar-img" alt="User avatar">
+                            }
+                        </div>
+
+                        <div class="col-md-9">
+                            <div class="section-title">
+                                <i class="fas fa-user-edit me-2 text-primary"></i>
+                                Personal Info
+                            </div>
+
+                            <form role="form" method="post" asp-action="Edit_Profile" asp-controller="Account" enctype="multipart/form-data">
+                                @Html.AntiForgeryToken()
+
+                                <!-- 必須的隱藏字段 -->
+                                <input type="hidden" asp-for="UserID" />
+                                <input type="hidden" asp-for="Username" />
+                                <input type="hidden" asp-for="Photo" />
+
+                                <div class="mb-3">
+                                    <label class="form-label stats-label">Username</label>
+                                    <input class="form-control form-input-premium" type="text" asp-for="Username" readonly>
+                                    <span asp-validation-for="Username" class="text-danger small"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label stats-label">Full Name</label>
+                                    <input class="form-control form-input-premium" type="text" asp-for="FullName">
+                                    <span asp-validation-for="FullName" class="text-danger small"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label stats-label">Email</label>
+                                    <input class="form-control form-input-premium" type="text" asp-for="Email">
+                                    <span asp-validation-for="Email" class="text-danger small"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label stats-label">Phone Number</label>
+                                    <input class="form-control form-input-premium" type="text" asp-for="PhoneNumber">
+                                    <span asp-validation-for="PhoneNumber" class="text-danger small"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label stats-label">Birth Date</label>
+                                    <input class="form-control form-input-premium" type="date" asp-for="BirthDate" />
+                                    <span asp-validation-for="BirthDate" class="text-danger small"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label stats-label">Join Date</label>
+                                    <input class="form-control form-input-premium" type="date" asp-for="JoinDate" />
+                                    <span asp-validation-for="JoinDate" class="text-danger small"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label stats-label">Department</label>
+                                    <select class="form-control form-select-premium" asp-for="Department" asp-items="ViewBag.Departments">
+                                        <option value="">Select Department</option>
+                                    </select>
+                                    <span asp-validation-for="Department" class="text-danger small"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label stats-label">Employee ID</label>
+                                    <input class="form-control form-input-premium" type="text" asp-for="EmployeeId">
+                                    <span asp-validation-for="EmployeeId" class="text-danger small"></span>
+                                </div>
+
+                                <!-- 文件上傳字段 -->
+                                <div class="mb-3">
+                                    <label class="form-label stats-label">Profile Picture</label>
+                                    <input type="file" class="form-control form-input-premium" asp-for="PhotoFile" />
+                                    <span asp-validation-for="PhotoFile" class="text-danger small"></span>
+                                </div>
+
+                                <div class="d-flex gap-3">
+                                    <button type="submit" class="btn btn-primary-glow rounded-pill px-4">Save Changes</button>
+                                    <button type="button" class="btn btn-secondary-glow rounded-pill px-4" onclick="goBack()">Back to Home Page</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <form id="logoutForm" asp-action="logout" asp-controller="Account" method="post" style="display:none;">
+        @Html.AntiForgeryToken()
+    </form>
+
+    <script>
+        // 导航功能（保持不变）
+        function goToDashboard() {
+            window.location.reload();
+        }
+
+        function goToInventoryManagement() {
+            window.location.href = '@Url.Action("Inbound_Outbound", "Home")';
+        }
+
+        function goToTransactions() {
+            alert('Transactions page coming soon!');
+        }
+
+        function goToReports() {
+            alert('Reports page coming soon!');
+        }
+
+        function goToSuppliers() {
+            alert('Suppliers page coming soon!');
+        }
+         function goToMainPage() {
+              window.location.href = '@Url.Action("Index", "Home")';
+        }
+
+
+        // 快速操作功能
+        function quickInbound() {
+            // 可以跳转到快速入库页面或打开入库模态框
+            alert('Quick inbound feature coming soon!');
+        }
+
+        function quickOutbound() {
+            // 可以跳转到快速出库页面或打开出库模态框
+            alert('Quick outbound feature coming soon!');
+        }
+
+
+          //點擊Edit Profile 跳轉到Edit_profile.cshtml
+        function goToEditProfile() {
+             window.location.href = '@Url.Action("Edit_Profile", "Account")';//表示跳轉到Account/Edit_Profile.cshtml
+          }
+
+
+        //點擊Change Password 跳轉到Change_Password.cshtml
+          function goToChangePassword(){
+              window.location.href = '@Url.Action("Change_Password", "Account")';//表示跳轉到Account/Change_Password.cshtml
+         }
+
+         //點擊Inventory Management 跳轉到Inbound&Outbound.cshtml
+          function goToInventory_Management(){
+               window.location.href = '@Url.Action("Inbound_Outbound", "Home")'//表示跳轉到Home/Inbound_Outbound.cshtml
+          }
+
+        function logout() {
+            if (confirm("Are you sure you want to logout?")) {
+                document.getElementById('logoutForm').submit();
+            }
+        }
+
+        function goBack(){
+            window.location.href = '/Home/Index';
+        }
+    </script>
+
+</body>
+</html>
+```

@@ -1,0 +1,1913 @@
+﻿@model IEnumerable<LHP_Inventory_management_system_MVC.Models.Parts>
+@{
+    Layout = null;
+    ViewData["Title"] = "Inventory Management - Inbound & Outbound";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Language" content="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .in-out-whole-container {
+            max-width: 80%; /* 或者您想要的宽度 */
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* 按鈕容器 */
+        .Inventory-action-buttons {
+            margin: 10px 0;
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+            /* 按鈕樣式 */
+            .Inventory-action-buttons .btn {
+                background: linear-gradient(to bottom, #3a4a6b, #2c3a57);
+                color: white;
+                border: none;
+                padding: 0.6rem 1.2rem;
+                font-weight: 500;
+                border-radius: 4px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                transition: all 0.2s ease;
+            }
+
+                .Inventory-action-buttons .btn:hover {
+                    background: linear-gradient(to bottom, #2c3a57, #1f2a40);
+                    transform: translateY(-1px);
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                }
+
+        /* 交易记录表格样式 */
+        .transaction-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 0.9rem;
+        }
+
+            .transaction-table th {
+                background-color: #f1f5f9;
+                color: #334155;
+                font-weight: 600;
+                padding: 0.75rem 1rem;
+                text-align: left;
+                position: sticky;
+                top: 0;
+            }
+
+            .transaction-table td {
+                padding: 0.75rem 1rem;
+                border-bottom: 1px solid #e2e8f0;
+            }
+
+            .transaction-table tr:hover td {
+                background-color: #f8fafc;
+            }
+
+        .order-number {
+            font-family: 'Courier New', monospace;
+            color: #475569;
+            font-size: 0.85rem;
+        }
+
+        .badge-type {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-inbound {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+
+        .badge-outbound {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+
+        .badge-transfer {
+            background-color: #ede9fe;
+            color: #5b21b6;
+        }
+
+        .order-date {
+            color: #64748b;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+
+        .part-name {
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .quantity-cell {
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .quantity-inbound {
+            color: #166534;
+        }
+
+        .quantity-outbound {
+            color: #b91c1c;
+        }
+
+        .quantity-transfer {
+            color: #5b21b6;
+        }
+
+        .operator-name {
+            color: #475569;
+            font-size: 0.85rem;
+        }
+
+        .total-amount {
+            font-weight: 600;
+            text-align: right;
+            color: #0f172a;
+        }
+
+        .action-cell {
+            text-align: center;
+        }
+
+        .action-icon {
+            color: #94a3b8;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+            .action-icon:hover {
+                color: #475569;
+            }
+
+        .stats-card {
+            border-left: 4px solid;
+        }
+
+        .stats-inbound {
+            border-left-color: #198754;
+        }
+
+        .stats-outbound {
+            border-left-color: #0d6efd;
+        }
+
+        .stats-total {
+            border-left-color: #6f42c1;
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: rgba(13, 110, 253, 0.05);
+        }
+
+        .badge {
+            font-size: 0.85em;
+        }
+
+        .custom-type-input {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="in-out-whole-container">
+        <!-- 標題部分 -->
+        <div class="text-center mb-4">
+            <h1 class="display-4">Inventory Management System</h1>
+            <p class="lead">Inbound & Outbound Operations</p>
+        </div>
+
+        <!-- 導航欄 -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4">
+            <div class="container-fluid">
+                <!-- 主菜單 -->
+                <div class="d-flex align-items-center">
+                    <div class="dropdown main-menu-dropdown">
+                        <a href="#" class="btn btn-outline-primary dropdown-toggle"
+                           id="mainMenuDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-bars me-2"></i> Main Menu
+                        </a>
+                        <ul class="dropdown-menu shadow" aria-labelledby="mainMenuDropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:void(0);" onclick="goToDashboard()">
+                                    <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:void(0);" onclick="goToInventoryManagement()">
+                                    <i class="fas fa-warehouse me-2"></i> Inventory Management
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:void(0);" onclick="goToTransactions​​()">
+                                    <i class="fas fa-chart-line me-2"></i>  ​​Transactions​​ <!-- 	採購/銷售訂單統一管理 -->
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:void(0);" onclick="goToReports()">
+                                    <i class="fas fa-chart-bar me-2"></i> Reports <!-- 	報表分析 -->
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:void(0);" onclick="goToSuppliers()">
+                                    <i class="fas fa-truck me-2"></i> Suppliers <!--供應商管理 -->
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 用戶菜單 -->
+                <div class="d-flex align-items-center ms-auto">
+                    <div class="dropdown">
+                        <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle"
+                           id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="~/images/default-avatar.jpg" alt="User Avatar"
+                                 class="rounded-circle me-2" width="40" height="40">
+                            <span class="fw-semibold">@User.Identity?.Name</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userDropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:void(0);" onclick="goToEditProfile()">
+                                    <i class="fa-solid fa-user-gear me-2"></i> Edit Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:void(0);" onclick="goToChangePassword()">
+                                    <i class="fa-solid fa-key me-2"></i> Change Password
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item text-danger" href="javascript:void(0);" onclick="logout()">
+                                    <i class="fa-solid fa-right-from-bracket me-2"></i> Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 出入庫操作按鈕 -->
+        <div class="Inventory-action-buttons">
+            <div class="button-container">
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#inboundModal">Inbound</button>
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#outboundModal">Outbound</button>
+            </div>
+        </div>
+
+        <!-- 兩欄佈局 -->
+        <div class="row mt-4">
+            <!-- 左側：當前庫存 -->
+            <div class="col-md-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">
+                            <i class="fas fa-boxes"></i> Current Inventory
+                        </h5>
+                        <div>
+                            <span class="badge bg-light text-dark">
+                                Total: @Model.Count() items
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- 庫存搜索欄 -->
+                    <div class="table-search-header">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <button class="btn btn-outline-secondary" type="button" id="searchPartsBtn">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                    <input type="text" id="inventorySearch" class="form-control" placeholder="Search by code, name, supplier...">
+                                    <button class="btn btn-outline-secondary" type="button" id="clearInventorySearch">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <select id="inventoryFilter" class="form-select">
+                                    <option value="all">All Items</option>
+                                    <option value="low">Low Stock</option>
+                                    <option value="out">Out of Stock</option>
+                                    <option value="normal">Normal Stock</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body" style="max-height: 600px; overflow-y: auto;">
+                        @if (Model.Any())
+                        {
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover" id="inventoryTable">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Code</th>
+                                            <th>Name</th>
+                                            <th>Supplier</th>
+                                            <th>Min Stock</th>
+                                            <th>Current Stock</th>
+                                            <th>CurrentValue</th>
+                                            <th>AverageValue</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var part in Model)
+                                        {
+
+                                            <tr>
+                                                <td>@part.Id</td>
+                                                <td>
+                                                    <span class="fw-bold">@part.Code</span>
+                                                </td>
+                                                <td>
+                                                    <strong>@part.Name</strong>
+                                                </td>
+                                                <td>@part.Supplier</td>
+                                                <td>@part.MinStock</td>
+                                                <td>@part.CurrentStock</td>
+                                                <td> @part.CurrentValue </td>
+                                                <td> @part.AverageValue </td>
+
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="text-center py-4">
+                                <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                                <p class="text-muted">No inventory items found</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右側：交易記錄 -->
+            <div class="col-md-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">
+                            <i class="fas fa-list"></i> Transaction Records
+                        </h5>
+                        <div>
+                            <span class="badge bg-light text-dark">
+                                Total: @(ViewBag.Orders?.Count ?? 0) records
+                            </span>
+                        </div>
+                    </div>
+                    <!-- 搜索欄 -->
+                    <div class="table-search-header">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <button class="btn btn-outline-secondary" type="button" id="searchTransactionBtn">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                    <input type="text" id="transactionSearch" class="form-control" placeholder="Search by order number, part code, operator...">
+                                    <button class="btn btn-outline-secondary" type="button" id="clearTransactionSearch">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <select id="transactionFilter" class="form-select">
+                                    <option value="all">All Transactions</option>
+                                    <option value="inbound">Inbound Only</option>
+                                    <option value="outbound">Outbound Only</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body" style="max-height: 600px; overflow-y: auto;">
+                        @if (ViewBag.Orders != null && ((IEnumerable<dynamic>)ViewBag.Orders).Any())
+                        {
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover" id="transactionTable">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Order No.</th>
+                                            <th>Type</th>
+                                            <th>Date</th>
+                                            <th>Part Code</th>
+                                            <th>Part Name</th>
+                                            <th>Qty</th>
+                                            <th>Operator</th>
+                                            <th>Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var order in ViewBag.Orders)
+                                        {
+                                            var typeClass = order.OrderType?.ToLower() == "inbound" ? "badge-inbound" :
+                                            order.OrderType?.ToLower() == "outbound" ? "badge-outbound" : "badge-transfer";
+
+                                            var quantityClass = order.OrderType?.ToLower() == "inbound" ? "quantity-inbound" :
+                                            order.OrderType?.ToLower() == "outbound" ? "quantity-outbound" : "quantity-transfer";
+
+                                            var quantitySign = order.OrderType?.ToLower() == "inbound" ? "+" :
+                                            order.OrderType?.ToLower() == "outbound" ? "-" : "→";
+
+                                            <tr>
+                                                <td><span class="order-number">@order.OrderNumber</span></td>
+                                                <td><span class="badge-type @typeClass">@order.OrderType?.ToUpper()</span></td>
+                                                <td><span class="order-date">@order.OrderDate.ToString("yyyy/MM/dd HH:mm")</span></td>
+                                                <td>@order.PartCode</td>
+                                                <td><span class="part-name" title="@order.PartName">@order.PartName</span></td>
+                                                <td class="quantity-cell @quantityClass">@quantitySign@order.Quantity</td>
+                                                <td><span class="operator-name">@order.OperatorName</span></td>
+                                                <td class="total-amount">@(order.TotalAmount?.ToString("C") ?? "N/A")</td>
+                                                <td class="action-cell">
+                                                    <i class="fas fa-eye action-icon" title="View Details"></i>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="text-center py-4">
+                                <i class="fas fa-receipt fa-3x text-muted mb-3"></i>
+                                <p class="text-muted">No transaction records found</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 入庫模態框 -->
+        <div class="modal fade" id="inboundModal" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-success text-white">
+                        <h5 class="modal-title">Inbound Action</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <form asp-action="CreateInbound" method="post" id="inboundForm">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Order Number</label>
+                                        <input type="text" class="form-control" name="OrderNumber" value="IN-@DateTime.Now.ToString("yyyyMMddHHmmss")" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Order Type</label>
+                                        <input type="text" class="form-control" value="Inbound" readonly>
+                                        <input type="hidden" name="OrderType" value="Inbound">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 操作員姓名 - 自動填充 -->
+                            <div class="mb-3">
+                                <label class="form-label">Operator Name</label>
+                                <input type="text" class="form-control" name="OperatorName" value="@User.Identity?.Name" readonly>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Supplier</label>
+                                <input type="text" class="form-control" name="SupplierOrCustomer" required>
+                            </div>
+
+                            <!-- 產品添加區域 -->
+                            <div class="card mb-3">
+                                <div class="card-header bg-light">
+                                    <h6 class="mb-0">Products</h6>
+                                </div>
+                                <div class="card-body">
+                                    <!-- 產品選擇表單 -->
+                                    <div class="row g-3 mb-3">
+                                        <div class="col-md-5">
+                                            <label class="form-label">Select Product</label>
+                                            <select class="form-control" id="partSelect">
+                                                <option value="">Select product</option>
+                                                @foreach (var part in Model)
+                                                {
+                                                    <option value="@part.Code" data-name="@part.Name">
+                                                        @part.Code - @part.Name
+                                                    </option>
+                                                }
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="form-label">Quantity</label>
+                                            <input type="number" class="form-control" id="productQuantity" min="1" value="1">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Unit Price</label>
+                                            <input type="number" class="form-control" id="productUnitPrice" step="0.01" min="0">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="form-label">&nbsp;</label>
+                                            <button type="button" class="btn btn-primary w-100" onclick="addProductToInbound()">
+                                                <i class="fas fa-plus"></i> Add
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- 新增產品選項 -->
+                                    <div class="mb-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="addNewProductCheck">
+                                            <label class="form-check-label" for="addNewProductCheck">
+                                                Add New Product
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- 新增產品表單 -->
+                                    <div id="newProductForm" class="custom-type-input" style="display: none;">
+                                        <h6 class="border-bottom pb-2 mb-3">New Product Information</h6>
+                                        <div class="row g-3">
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Product Code *</label>
+                                                    <input type="text" class="form-control" id="newProductCode" placeholder="Enter product code">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Product Name *</label>
+                                                    <input type="text" class="form-control" id="newProductName" placeholder="Enter product name">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Unit Price *</label>
+                                                    <input type="number" class="form-control" id="newProductPrice" step="0.01" min="0" placeholder="0.00">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Supplier</label>
+                                                    <input type="text" class="form-control" id="newProductSupplier" placeholder="Enter supplier name">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Quantity</label>
+                                                    <input type="number" class="form-control" id="newProductQuantity" min="1" value="1">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="mb-3">
+                                                    <label class="form-label">&nbsp;</label>
+                                                    <button type="button" class="btn btn-success w-100" onclick="addNewProductToInbound()">
+                                                        <i class="fas fa-plus"></i> Add New <!--添加到總和區-->
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- 產品列表表格 -->
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" id="inboundProductsTable">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>Product Code</th>
+                                                    <th>Product Name</th>
+                                                    <th>Quantity</th>
+                                                    <th>Unit Price</th>
+                                                    <th>Total</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- 產品行將在這裡動態添加 -->
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="4" class="text-end"><strong>Grand Total:</strong></td>
+                                                    <td><strong id="grandTotal">$0.00</strong></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Remarks</label>
+                                <textarea class="form-control" name="Remarks" rows="3" placeholder="Optional remarks"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-success">Confirm Inbound</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- 出庫模態框 -->
+        <div class="modal fade" id="outboundModal" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary text-white">
+                        <h5 class="modal-title">Outbound Action</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <form asp-action="CreateOutbound" method="post">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Outbound Number</label>
+                                        <input type="text" class="form-control" name="OutboundNumber" value="OUT-@DateTime.Now.ToString("yyyyMMddHHmmss")" readonly>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Operator Name</label>
+                                <input type="text" class="form-control" name="OperatorName" value="@User.Identity?.Name" readonly>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Customer/Recipient</label>
+                                <input type="text" class="form-control" name="Customer">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Select Product</label>
+                                <select class="form-control" id="outboundPartSelect">
+                                    <option value="">Select product for outbound</option>
+                                    @foreach (var part in Model.Where(p => p.CurrentStock > 0))
+                                    {
+                                        <option value="@part.Id" data-name="@part.Name" data-code="@part.Code" data-stock="@part.CurrentStock">
+                                            @part.Code - @part.Name (Stock: @part.CurrentStock)
+                                        </option>
+                                    }
+                                </select>
+                                <div class="mt-2">
+                                    <button type="button" class="btn btn-primary" onclick="addProductToOutbound()">
+                                        <i class="fas fa-plus"></i> Add Product
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- 產品列表 -->
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="outboundPartsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Product Code</th>
+                                            <th>Product Name</th>
+                                            <th>Current Stock</th>
+                                            <th>Outbound Quantity</th>
+                                            <th>Unit Price</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- 動態添加的產品行 -->
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Remarks</label>
+                                <textarea class="form-control" name="Remarks" rows="3" placeholder="Optional remarks"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Confirm Outbound</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 新增產品模態框 -->
+        <div class="modal fade" id="newProductModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-warning text-dark">
+                        <h5 class="modal-title">Add New Product</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <form id="newProductForm">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label class="form-label">Product Code</label>
+                                <input type="text" class="form-control" id="newProductCode" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Product Name</label>
+                                <input type="text" class="form-control" id="newProductName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Supplier</label>
+                                <input type="text" class="form-control" id="newProductSupplier">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Price</label>
+                                <input type="number" class="form-control" id="newProductPrice" step="0.01" min="0">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Min Stock</label>
+                                <input type="number" class="form-control" id="newProductMinStock" min="0" value="0">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-warning">Add Product</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- 登出表單 -->
+    <form id="logoutForm" asp-action="logout" asp-controller="Account" method="post" style="display:none;">
+        @Html.AntiForgeryToken()
+    </form>
+
+    <script>
+            // 產品計數器
+            let productCounter = 0;
+
+            // 頁面加載完成後初始化
+            document.addEventListener('DOMContentLoaded', function(){
+                // 產品選擇事件
+                const partSelect = document.getElementById('partSelect');
+                if (partSelect) {
+                    partSelect.addEventListener('change', function() {
+                        const selectedOption = this.options[this.selectedIndex];
+                        if (selectedOption.value) {
+                            // 自動填充單價
+                            document.getElementById('productUnitPrice').value = selectedOption.getAttribute('data-price') || '0';
+                        }
+                    });
+                }
+
+                // 新增產品切換
+                const newProductCheck = document.getElementById('addNewProductCheck');
+                const newProductForm = document.getElementById('newProductForm');
+                if (newProductCheck && newProductForm) {
+                    newProductCheck.addEventListener('change', function() {
+                        newProductForm.style.display = this.checked ? 'block' : 'none';
+                        if (this.checked) {
+                            // 清空現有產品選擇
+                            partSelect.value = '';
+                            document.getElementById('productUnitPrice').value = '';
+                        }
+                    });
+                }
+            });
+
+            // 添加現有產品到總列表
+            function addProductToInbound() {
+                try{
+                      console.log('開始添加產品');
+                      const partSelect = document.getElementById('partSelect');
+                      const quantityInput = document.getElementById('productQuantity');
+                      const unitPriceInput = document.getElementById('productUnitPrice');
+                      const selectedOption = partSelect.options[partSelect.selectedIndex];
+                      const productCode = selectedOption.value;
+                      const productName = selectedOption.getAttribute('data-name');
+                      const quantity = parseInt(quantityInput.value) || 0;
+                      const unitPrice = parseFloat(unitPriceInput.value) || 0;
+                      console.log('獲取到的數據:', { productCode, productName, quantity, unitPrice });
+
+                      //驗證輸入
+                      if(!productCode)
+                      {
+                        alert(!請選擇一個產品);
+                        return;
+                       }
+
+                       if(quantity <=0){
+                           alert('請輸入有效的數量');
+                           quantityInput.focus();
+                           return;
+                       }
+
+                       if(unitPrice<=0){
+                           alert('請輸入有效的單價');
+                            unitPriceInput.focus();
+                         return;
+                       }
+
+                         // 添加到表格
+                        addProductToTable(productCode, productName, quantity, unitPrice, false);
+
+                        console.log('現有產品添加成功');
+                   } catch (error) {
+                    console.error('Error adding product to inbound:', error);
+                    alert('添加產品時發生錯誤，請重試');
+                }
+            }
+
+            // 添加新產品到列表
+            function addNewProductToInbound() {
+
+                try{
+                         console.log('開始添加產品');
+                         const productCode = document.getElementById('newProductCode').value.trim();
+                         const productName = document.getElementById('newProductName').value.trim();
+                         const unitPrice = parseFloat(document.getElementById('newProductPrice').value) || 0;
+                         const quantity = parseInt(document.getElementById('newProductQuantity').value) || 0;
+                         const supplier = document.getElementById('newProductSupplier').value.trim();
+                         console.log('獲取到的新產品數據:', { productCode, productName, unitPrice, quantity, supplier });
+
+
+                          //驗證輸入
+                          if(!productCode)
+                          {
+                            alert(!請輸入產品代碼);
+                            document.getElementById('newProductCode').focus();
+                            return;
+                           }
+
+                           if (!productName) {
+                            alert('請輸入產品名稱');
+                            document.getElementById('newProductName').focus();
+                                return;
+                             }
+
+                            if (quantity <= 0) {
+                             alert('請輸入有效的數量');
+                             document.getElementById('newProductQuantity').focus();
+                              return;
+                            }
+
+                            if (unitPrice <= 0) {
+                             alert('請輸入有效的單價');
+                             document.getElementById('newProductPrice').focus();
+                             return;
+                             }
+
+                             // 添加到表格（標記為新產品）
+                            addProductToTable(productCode, productName, quantity, unitPrice, true, supplier);
+                            console.log('新產品添加成功');
+
+                }catch(error)
+                {
+                         console.error('Error adding new product to inbound:', error);
+                             alert('添加新產品時發生錯誤，請重試');
+                }
+
+            }
+
+            // 添加產品到表格
+            function addProductToTable(productCode, productName, quantity, unitPrice, isNew = false, supplier = '') {
+                try {
+                    console.log('開始添加產品到表格...');
+                    const tableBody = document.getElementById('inboundProductsTable').getElementsByTagName('tbody')[0];
+                    const total = quantity * unitPrice;
+                   // 使用表格當前行數作為索引（會自動處理刪除後的重新索引）
+                    const rowIndex = tableBody.rows.length;
+
+                    // 獲取表單頂部的共享訂單信息
+                    /*
+                    const orderNumber = document.querySelector('input[name="OrderNumber"]').value;
+                    const orderType = document.querySelector('input[name="OrderType"]').value;
+                    const operatorName = document.querySelector('input[name="OperatorName"]').value;
+                    const supplierOrCustomer = document.querySelector('input[name="SupplierOrCustomer"]').value;*/
+                    const remarks = document.querySelector('textarea[name="Remarks"]').value;
+
+                    const newRow = tableBody.insertRow();
+
+                    newRow.innerHTML = `
+                        <td>
+                            ${productCode}
+                            ${isNew ? '<span class="badge bg-warning ms-1">New</span>' : ''}
+                            <!-- 隱藏字段用於表單提交 -->
+
+                            <input type="hidden" name="orders[${rowIndex}].PartCode" value="${productCode}">
+                            <input type="hidden" name="orders[${rowIndex}].PartName" value="${productName}">
+                            <input type="hidden" name="orders[${rowIndex}].Quantity" value="${quantity}">
+                            <input type="hidden" name="orders[${rowIndex}].UnitPrice" value="${unitPrice}">
+                            <input type="hidden" name="orders[${rowIndex}].TotalAmount" value="${total}">
+                            <input type="hidden" name="orders[${rowIndex}].Remarks" value="${remarks}">
+                            ${isNew ? `
+                                <input type="hidden" name="newProducts[${rowIndex}].Code" value="${productCode}">
+                                <input type="hidden" name="newProducts[${rowIndex}].Name" value="${productName}">
+                                <input type="hidden" name="newProducts[${rowIndex}].Price" value="${unitPrice}">
+                                <input type="hidden" name="newProducts[${rowIndex}].Supplier" value="${supplier}">
+                                <input type="hidden" name="newProducts[${rowIndex}].CurrentStock" value="${quantity}">
+                                <input type="hidden" name="newProducts[${rowIndex}].MinStock" value="0">
+                            ` : ''}
+                        </td>
+                        <td>${productName}</td>
+                        <td>${quantity}</td>
+                        <td>$${unitPrice.toFixed(2)}</td>
+                        <td>$${total.toFixed(2)}</td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeProduct(this)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    `;
+
+                    // 更新總金額
+                    updateGrandTotal();
+                    console.log('產品添加成功，當前產品數量:', tableBody.rows.length);
+
+                } catch(error) {
+                    console.error('Error adding product to table:', error);
+                    alert('添加產品時發生錯誤，請重試');
+                }
+            }
+
+            // 移除產品
+            function removeProduct(button) {
+                try
+                {
+                console.log('開始移除產品.....')
+
+                const row = button.closest('tr')
+                if(!row)
+                {
+                          console.error('找不到要移除的行');
+                            return;
+                }
+
+                // 獲取產品信息用於確認
+
+                const productCode = row.cells[0].textContent.trim();
+
+                if (confirm(`確定要移除產品 ${productCode} 嗎？`))
+                {
+                    row.remove();
+                    console.log(`產品 ${productCode} 已移除`);
+
+                            // 重新索引所有行
+                            reindexProductRows();
+
+                            // 更新總金額
+                            updateGrandTotal();
+                     updateGrandTotal();
+                       }
+                       }
+                   catch (error)
+                       {
+                console.error('Error removing product:', error);
+                alert('移除產品時發生錯誤，請重試');
+                        }
+
+            }
+
+
+            // 重新索引產品（當刪除產品時）
+
+            function reindexProductRows() {
+                try {
+                    console.log('開始重新索引產品行...');
+                    const tableBody = document.getElementById('inboundProductsTable').getElementsByTagName('tbody')[0];
+                    const rows = tableBody.getElementsByTagName('tr');
+
+                    console.log(`需要重新索引 ${rows.length} 行`);
+
+                    for (let i = 0; i < rows.length; i++) {
+                        const row = rows[i];
+                        const inputs = row.getElementsByTagName('input');
+
+                        for (let input of inputs) {
+                            // 更新 orders 索引
+                            if (input.name.includes('orders[')) {
+                                const newName = input.name.replace(/orders\[\d+\]/, `orders[${i}]`);
+                                input.name = newName;
+                                console.log(`更新 orders 字段: ${input.name}`);
+                            }
+
+                            // 更新 newProducts 索引
+                            if (input.name.includes('newProducts[')) {
+                                const newName = input.name.replace(/newProducts\[\d+\]/, `newProducts[${i}]`);
+                                input.name = newName;
+                                console.log(`更新 newProducts 字段: ${input.name}`);
+                            }
+                        }
+                    }
+
+                    console.log('重新索引完成');
+
+                } catch (error) {
+                    console.error('Error reindexing product rows:', error);
+                }
+            }
+
+            // 更新總金額
+            function updateGrandTotal() {
+                try {
+                    const tableBody = document.getElementById('inboundProductsTable').getElementsByTagName('tbody')[0];
+                    const rows = tableBody.getElementsByTagName('tr');
+                    let grandTotal = 0;
+
+                    // 遍歷每一行，計算總金額
+                    for (let row of rows) {
+                        // 獲取總價單元格（第5個td，索引為4）
+                        const totalCell = row.cells[4];
+                        if (totalCell) {
+                            // 提取金額數字（移除 $ 符號）
+                            const totalText = totalCell.textContent.replace('$', '');
+                            const totalValue = parseFloat(totalText);
+
+                            if (!isNaN(totalValue)) {
+                                grandTotal += totalValue;
+                            }
+                        }
+                    }
+
+                    // 更新總金額顯示
+                    const grandTotalElement = document.getElementById('grandTotal');
+                    grandTotalElement.textContent = `$${grandTotal.toFixed(2)}`;
+
+                    console.log('計算出的總金額:', grandTotal);
+
+                } catch(error) {
+                    console.error('Error updating grand total:', error);
+                }
+            }
+
+
+             // 更新所有行的共享信息（在提交前調用）
+             function updateAllRowsSharedInfo() {
+                try {
+                    const tableBody = document.getElementById('inboundProductsTable').getElementsByTagName('tbody')[0];
+                    const rows = tableBody.getElementsByTagName('tr');
+
+                    // 獲取最新的共享信息
+                    const orderNumber = document.querySelector('input[name="OrderNumber"]').value;
+                    const orderType = document.querySelector('input[name="OrderType"]').value;
+                    const operatorName = document.querySelector('input[name="OperatorName"]').value;
+                    const supplierOrCustomer = document.querySelector('input[name="SupplierOrCustomer"]').value;
+                    const remarks = document.querySelector('textarea[name="Remarks"]').value;
+
+                    console.log('更新所有行的共享信息:', { orderNumber, orderType, operatorName, supplierOrCustomer });
+
+                    for (let i = 0; i < rows.length; i++) {
+                        const row = rows[i];
+                        const inputs = row.getElementsByTagName('input');
+
+                        for (let input of inputs) {
+                            if (input.name.includes('orders[')) {
+                                if (input.name.includes('OrderNumber')) {
+                                    input.value = orderNumber;
+                                } else if (input.name.includes('OrderType')) {
+                                    input.value = orderType;
+                                } else if (input.name.includes('OperatorName')) {
+                                    input.value = operatorName;
+                                } else if (input.name.includes('SupplierOrCustomer')) {
+                                    input.value = supplierOrCustomer;
+                                } else if (input.name.includes('Remarks')) {
+                                    input.value = remarks;
+                                }
+                            }
+                        }
+                    }
+
+                    console.log('共享信息更新完成');
+
+                } catch (error) {
+                    console.error('Error updating shared info:', error);
+                }
+            }
+
+                        // 表單提交前的數據驗證
+            function validateInboundForm() {
+                try {
+                    const tableBody = document.getElementById('inboundProductsTable').getElementsByTagName('tbody')[0];
+                    const productCount = tableBody.rows.length;
+
+                    if (productCount === 0) {
+                        alert('請至少添加一個產品');
+                        return false;
+                    }
+
+                    const supplier = document.querySelector('input[name="SupplierOrCustomer"]').value.trim();
+                    if (!supplier) {
+                        alert('請填寫供應商信息');
+                        document.querySelector('input[name="SupplierOrCustomer"]').focus();
+                        return false;
+                    }
+
+                    // 確保所有隱藏字段都有正確的值
+                    updateAllRowsSharedInfo();
+
+                    console.log('表單驗證通過，準備提交');
+                    return true;
+
+                } catch (error) {
+                    console.error('表單驗證錯誤:', error);
+                    alert('表單驗證時發生錯誤: ' + error.message);
+                    return false;
+                }
+            }
+
+            // 修改表單提交事件處理
+            document.addEventListener('DOMContentLoaded', function() {
+                const inboundForm = document.getElementById('inboundForm');
+                if (inboundForm) {
+                    inboundForm.addEventListener('submit', function(e) {
+                        e.preventDefault();
+
+                        try {
+                            console.log('開始表單提交處理...');
+
+                            // 表單驗證
+                            if (!validateInboundForm()) {
+                                return;
+                            }
+
+                            // 重新索引確保索引連續
+                            reindexProductRows();
+
+                            console.log('表單驗證通過，開始提交...');
+
+                            // 顯示加載狀態
+                            const submitBtn = this.querySelector('button[type="submit"]');
+                            const originalText = submitBtn.innerHTML;
+                            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 處理中...';
+                            submitBtn.disabled = true;
+
+                            // 使用傳統表單提交
+                            console.log('提交表單...');
+                            this.submit();
+                        } catch (error) {
+                            console.error('表單提交錯誤:', error);
+                            alert('表單提交時發生錯誤: ' + error.message);
+
+                            // 恢復按鈕狀態
+                            const submitBtn = inboundForm.querySelector('button[type="submit"]');
+                            if (submitBtn) {
+                                submitBtn.innerHTML = '確認入庫';
+                                submitBtn.disabled = false;
+                            }
+                        }
+                    });
+                }
+            });
+
+
+            //添加產品到出庫表單
+            function addProductToOutbound() {
+                try {
+                    console.log('開始添加出庫產品');
+                    const partSelect = document.getElementById('outboundPartSelect');
+                    const selectedOption = partSelect.options[partSelect.selectedIndex];
+
+                    if (!selectedOption.value) {
+                        alert('請選擇一個產品');
+                        return;
+                    }
+
+                    const productId = selectedOption.value;
+                    const productCode = selectedOption.getAttribute('data-code');
+                    const productName = selectedOption.getAttribute('data-name');
+                    const currentStock = parseInt(selectedOption.getAttribute('data-stock')) || 0;
+
+                    // 檢查是否已經添加過該產品
+                    const tableBody = document.getElementById('outboundPartsTable').getElementsByTagName('tbody')[0];
+                    const existingRows = tableBody.getElementsByTagName('tr');
+
+                    for (let row of existingRows) {
+                        const existingCode = row.cells[0].textContent.trim();
+                        if (existingCode === productCode) {
+                            alert('該產品已經在出庫列表中');
+                            return;
+                        }
+                    }
+
+                    // 添加到表格
+                    const newRow = tableBody.insertRow();
+                    const rowIndex = tableBody.rows.length;
+
+                    newRow.innerHTML = `
+                        <td>
+                            ${productCode}
+                            <input type="hidden" name="orders[${rowIndex}].PartCode" value="${productCode}">
+                            <input type="hidden" name="orders[${rowIndex}].PartName" value="${productName}">
+                        </td>
+                        <td>${productName}</td>
+                        <td>${currentStock}</td>
+                        <td>
+                            <input type="number" class="form-control form-control-sm"
+                                   name="orders[${rowIndex}].Quantity"
+                                   min="1" max="${currentStock}"
+                                   value="1" required
+                                   onchange="validateOutboundQuantity(this, ${currentStock})">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control form-control-sm"
+                                   name="orders[${rowIndex}].UnitPrice"
+                                   step="0.01" min="0.01"
+                                   value="0.00" required
+                                   placeholder="輸入單價">
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeOutboundProduct(this)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    `;
+
+                    // 清空選擇
+                    partSelect.value = '';
+                    console.log('產品添加到出庫列表成功');
+
+                } catch (error) {
+                    console.error('添加產品到出庫列表時發生錯誤:', error);
+                    alert('添加產品時發生錯誤，請重試');
+                }
+            }
+
+            // 驗證出庫數量
+            function validateOutboundQuantity(input, maxStock) {
+                const quantity = parseInt(input.value) || 0;
+
+                if (quantity <= 0) {
+                    alert('出庫數量必須大於 0');
+                    input.value = 1;
+                    input.focus();
+                    return;
+                }
+
+                if (quantity > maxStock) {
+                    alert(`出庫數量不能超過當前庫存 ${maxStock}`);
+                    input.value = maxStock;
+                    input.focus();
+                    return;
+                }
+            }
+
+            // 移除出庫產品
+            function removeOutboundProduct(button) {
+                try {
+                    const row = button.closest('tr');
+                    if (!row) {
+                        console.error('找不到要移除的行');
+                        return;
+                    }
+
+                    const productCode = row.cells[0].textContent.trim();
+                    if (confirm(`確定要從出庫列表中移除產品 ${productCode} 嗎？`)) {
+                        row.remove();
+                        console.log(`產品 ${productCode} 已從出庫列表移除`);
+
+                        // 重新索引所有行
+                        reindexOutboundProductRows();
+                    }
+                } catch (error) {
+                    console.error('移除出庫產品時發生錯誤:', error);
+                    alert('移除產品時發生錯誤，請重試');
+                }
+            }
+
+             // 重新索引出庫產品行
+            function reindexOutboundProductRows() {
+                try {
+                    const tableBody = document.getElementById('outboundPartsTable').getElementsByTagName('tbody')[0];
+                    const rows = tableBody.getElementsByTagName('tr');
+
+                    for (let i = 0; i < rows.length; i++) {
+                        const row = rows[i];
+                        const inputs = row.getElementsByTagName('input');
+
+                        for (let input of inputs) {
+                            if (input.name.includes('orders[')) {
+                                const newName = input.name.replace(/orders\[\d+\]/, `orders[${i}]`);
+                                input.name = newName;
+                            }
+                        }
+                    }
+
+                    console.log('出庫產品重新索引完成');
+
+                } catch (error) {
+                    console.error('重新索引出庫產品行時發生錯誤:', error);
+                }
+            }
+
+                // 出庫表單驗證
+
+             function validateOutboundForm() {
+                try {
+                    const tableBody = document.getElementById('outboundPartsTable').getElementsByTagName('tbody')[0];
+                    const productCount = tableBody.rows.length;
+
+                    if (productCount === 0) {
+                        alert('請至少添加一個出庫產品');
+                        return false;
+                    }
+
+                    // 檢查每個產品的出庫數量是否超過庫存
+                    const rows = tableBody.getElementsByTagName('tr');
+                    for (let row of rows) {
+                        const stockCell = row.cells[2]; // 當前庫存單元格
+                        const quantityInput = row.cells[3].querySelector('input'); // 出庫數量輸入框
+                        const unitPriceInput = row.cells[4].querySelector('input'); // 單價輸入框
+
+                        if (stockCell && quantityInput && unitPriceInput) {
+                            const currentStock = parseInt(stockCell.textContent) || 0;
+                            const outboundQuantity = parseInt(quantityInput.value) || 0;
+                            const unitPrice = parseFloat(unitPriceInput.value) || 0;
+                            const productCode = row.cells[0].textContent.trim();
+
+                            if (outboundQuantity > currentStock) {
+                                alert(`產品 ${productCode} 出庫數量 ${outboundQuantity} 超過當前庫存 ${currentStock}`);
+                                quantityInput.focus();
+                                return false;
+                            }
+
+                            if (outboundQuantity <= 0) {
+                                alert(`產品 ${productCode} 出庫數量必須大於 0`);
+                                quantityInput.focus();
+                                return false;
+                            }
+
+                            if (unitPrice <= 0) {
+                                alert(`產品 ${productCode} 單價必須大於 0`);
+                                unitPriceInput.focus();
+                                return false;
+                            }
+                        }
+                    }
+
+                    console.log('出庫表單驗證通過');
+                    return true;
+
+                } catch (error) {
+                    console.error('出庫表單驗證錯誤:', error);
+                    alert('出庫表單驗證時發生錯誤: ' + error.message);
+                    return false;
+                }
+            }
+
+
+            // 更新所有出庫行的共享信息（在提交前調用）
+            function updateAllOutboundRowsSharedInfo() {
+                try {
+                    const tableBody = document.getElementById('outboundPartsTable').getElementsByTagName('tbody')[0];
+                    const rows = tableBody.getElementsByTagName('tr');
+
+                    // 獲取最新的共享信息
+                    const orderNumber = document.querySelector('input[name="OutboundNumber"]').value;
+                    const operatorName = document.querySelector('input[name="OperatorName"]').value;
+                    const customer = document.querySelector('input[name="Customer"]').value;
+                    const remarks = document.querySelector('textarea[name="Remarks"]').value;
+
+                    console.log('更新所有出庫行的共享信息:', { orderNumber, operatorName, customer });
+
+                    for (let i = 0; i < rows.length; i++) {
+                        const row = rows[i];
+                        const inputs = row.getElementsByTagName('input');
+
+                        for (let input of inputs) {
+                            if (input.name.includes('orders[')) {
+                                // 計算總金額
+                                if (input.name.includes('Quantity') || input.name.includes('UnitPrice')) {
+                                    const quantityInput = row.cells[3].querySelector('input[name*="Quantity"]');
+                                    const unitPriceInput = row.cells[4].querySelector('input[name*="UnitPrice"]');
+
+                                    if (quantityInput && unitPriceInput) {
+                                        const quantity = parseInt(quantityInput.value) || 0;
+                                        const unitPrice = parseFloat(unitPriceInput.value) || 0;
+                                        const totalAmount = quantity * unitPrice;
+
+                                        // 更新總金額隱藏字段
+                                        const totalAmountInput = Array.from(inputs).find(input =>
+                                            input.name.includes('TotalAmount')
+                                        );
+                                        if (totalAmountInput) {
+                                            totalAmountInput.value = totalAmount;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    console.log('出庫共享信息更新完成');
+
+                } catch (error) {
+                    console.error('Error updating outbound shared info:', error);
+                }
+            }
+
+            // 為出庫表單添加提交事件處理
+            document.addEventListener('DOMContentLoaded', function() {
+                const outboundForm = document.querySelector('form[action*="CreateOutbound"]');
+                if (outboundForm) {
+                    outboundForm.addEventListener('submit', function(e) {
+                        // 不需要阻止默認行為，因為我們使用傳統表單提交
+
+                        try {
+                            console.log('開始出庫表單提交處理...');
+
+                            // 表單驗證
+                            if (!validateOutboundForm()) {
+                                e.preventDefault();
+                                return;
+                            }
+
+                            // 更新所有行的共享信息
+                            updateAllOutboundRowsSharedInfo();
+
+                            // 重新索引確保索引連續
+                            reindexOutboundProductRows();
+
+                            console.log('出庫表單驗證通過，開始提交...');
+
+                            // 顯示加載狀態
+                            const submitBtn = this.querySelector('button[type="submit"]');
+                            const originalText = submitBtn.innerHTML;
+                            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 處理中...';
+                            submitBtn.disabled = true;
+
+                            // 讓表單正常提交
+                            console.log('提交出庫表單...');
+
+                        } catch (error) {
+                            console.error('出庫表單提交錯誤:', error);
+                            alert('出庫表單提交時發生錯誤: ' + error.message);
+                            e.preventDefault();
+
+                            // 恢復按鈕狀態
+                            const submitBtn = outboundForm.querySelector('button[type="submit"]');
+                            if (submitBtn) {
+                                submitBtn.innerHTML = '確認出庫';
+                                submitBtn.disabled = false;
+                            }
+                        }
+                    });
+                }
+            });
+
+
+
+
+
+
+
+
+
+            // 顯示成功訊息的函數
+            function showSuccessToUser(message) {
+                let successDiv = document.getElementById('formSuccessDisplay');
+                if (!successDiv) {
+                    successDiv = document.createElement('div');
+                    successDiv.id = 'formSuccessDisplay';
+                    successDiv.className = 'alert alert-success mt-3';
+                    document.body.insertBefore(successDiv, document.body.firstChild);
+                }
+
+                successDiv.textContent = message;
+                successDiv.style.display = 'block';
+
+                // 5秒後自動隱藏
+                setTimeout(() => {
+                    successDiv.style.display = 'none';
+                }, 5000);
+
+                console.log('Success message displayed:', message);
+            }
+
+            // 顯示錯誤訊息的函數
+            function showErrorToUser(message) {
+                let errorDiv = document.getElementById('formErrorDisplay');
+                if (!errorDiv) {
+                    errorDiv = document.createElement('div');
+                    errorDiv.id = 'formErrorDisplay';
+                    errorDiv.className = 'alert alert-danger mt-3';
+                    document.body.insertBefore(errorDiv, document.body.firstChild);
+                }
+
+                errorDiv.textContent = `Error: ${message}`;
+                errorDiv.style.display = 'block';
+
+                // 5秒後自動隱藏
+                setTimeout(() => {
+                    errorDiv.style.display = 'none';
+                }, 5000);
+
+                console.log('Error message displayed:', message);
+            }
+
+
+
+
+            // 搜索功能實現
+            document.addEventListener('DOMContentLoaded', function() {
+                // 變量定義 - 獲取DOM元素
+                const inventorySearch = document.getElementById('inventorySearch');
+                const inventoryFilter = document.getElementById('inventoryFilter');
+                const clearInventorySearch = document.getElementById('clearInventorySearch');
+                const inventoryTable = document.getElementById('inventoryTable');
+                const searchPartsBtn = document.getElementById('searchPartsBtn');
+
+                const transactionSearch = document.getElementById('transactionSearch');
+                const transactionFilter = document.getElementById('transactionFilter');
+                const clearTransactionSearch = document.getElementById('clearTransactionSearch');
+                const transactionTable = document.getElementById('transactionTable');
+                const searchTransactionBtn = document.getElementById('searchTransactionBtn');
+
+                console.log('搜索元素加载情况:', {
+                    inventorySearch: !!inventorySearch,
+                    inventoryTable: !!inventoryTable,
+                    transactionSearch: !!transactionSearch,
+                    transactionTable: !!transactionTable
+                });
+
+                // 庫存搜索相关事件
+                if (inventorySearch) {
+                    inventorySearch.addEventListener('input', performInventorySearch);
+                }
+                if (inventoryFilter) {
+                    inventoryFilter.addEventListener('change', performInventorySearch);
+                }
+                if (searchPartsBtn) {
+                    searchPartsBtn.addEventListener('click', performInventorySearch);
+                }
+
+                // 交易紀錄搜索相關事件
+                if (transactionSearch) {
+                    transactionSearch.addEventListener('input', performTransactionSearch);
+                }
+                if (transactionFilter) {
+                    transactionFilter.addEventListener('change', performTransactionSearch);
+                }
+                if (searchTransactionBtn) {
+                    searchTransactionBtn.addEventListener('click', performTransactionSearch);
+                }
+
+                // 清除庫存搜索
+                if (clearInventorySearch) {
+                    clearInventorySearch.addEventListener('click', function() {
+                        if (inventorySearch) {
+                            inventorySearch.value = '';
+                            performInventorySearch();
+                            inventorySearch.focus();
+                        }
+                    });
+                }
+
+                // 清除交易紀錄搜索
+                if (clearTransactionSearch) {
+                    clearTransactionSearch.addEventListener('click', function() {
+                        if (transactionSearch) {
+                            transactionSearch.value = '';
+                            performTransactionSearch();
+                            transactionSearch.focus();
+                        }
+                    });
+                }
+
+                // 初始化搜索
+                performInventorySearch();
+                performTransactionSearch();
+            });
+
+
+
+
+                //庫存搜索函數
+            function performInventorySearch() {
+                try {
+                    console.log('执行库存搜索...');
+                    // 獲取搜索條件
+                    const searchTerm = inventorySearch.value.toLowerCase();
+                    const filterValue = inventoryFilter.value;
+                    let visibleCount = 0;
+
+                    // 檢查庫存表格是否存在
+                    if (inventoryTable) {
+                        const tbody = inventoryTable.getElementsByTagName('tbody')[0];
+                        if (!tbody) {
+                            console.error('找不到库存表格的 tbody');
+                            return;
+                        }
+
+                        const rows = tbody.getElementsByTagName('tr');
+                        console.log(`处理 ${rows.length} 行库存数据`);
+
+                        // 遍历每一行进行过滤
+                        for (let row of rows) {
+                            // 获取行中的数据
+                            const code = row.cells[1]?.textContent?.toLowerCase() || '';
+                            const name = row.cells[2]?.textContent?.toLowerCase() || '';
+                            const supplier = row.cells[3]?.textContent?.toLowerCase() || '';
+
+                            // 计算库存状态
+                            const minStock = parseInt(row.cells[4]?.textContent) || 0;
+                            const currentStock = parseInt(row.cells[5]?.textContent) || 0;
+
+                            let stockStatus = 'normal';
+                            if (currentStock === 0) {
+                                stockStatus = 'out';
+                            } else if (currentStock < minStock) {
+                                stockStatus = 'low';
+                            }
+
+                            // 检查是否匹配搜索条件
+                            const matchSearch = !searchTerm ||
+                                code.includes(searchTerm) ||
+                                name.includes(searchTerm) ||
+                                supplier.includes(searchTerm);
+
+                            // 检查是否匹配过滤条件
+                            const matchesFilter = filterValue === 'all' ||
+                                (filterValue === 'low' && stockStatus === 'low') ||
+                                (filterValue === 'out' && stockStatus === 'out') ||
+                                (filterValue === 'normal' && stockStatus === 'normal');
+
+                            // 如果同时匹配搜索和过滤条件，显示该行
+                            if (matchSearch && matchesFilter) {
+                                row.style.display = '';
+                                visibleCount++;
+                                // 如果有搜索关键字，高亮显示匹配的文本
+                                if (searchTerm) {
+                                    highlightText(row, searchTerm);
+                                } else {
+                                    removeHighlights(row);
+                                }
+                            } else {
+                                // 不匹配條件，隱藏該行并移除高亮
+                                row.style.display = 'none';
+                                removeHighlights(row);
+                            }
+                        }
+
+                        // 更新顯示的庫存項目數量
+                        const inventoryCountElement = document.querySelector('.card-header .badge');
+                        if (inventoryCountElement) {
+                            inventoryCountElement.textContent = `Total: ${visibleCount} items`;
+                        }
+
+                        console.log(`库存搜索完成，显示 ${visibleCount} 个项目`);
+                    }
+                } catch (error) {
+                    console.error('库存搜索错误:', error);
+                }
+            }
+
+                //交易紀錄搜索函數
+                function performTransactionSearch() {
+                    try {
+                        console.log('執行交易紀錄搜索...');
+                        // 獲取搜索條件
+                        const searchTerm = transactionSearch.value.toLowerCase();
+                        const filterValue = transactionFilter.value;
+                        let visibleCount = 0;
+
+                        // 檢查庫存表格是否存在
+                        if (transactionTable) {
+                            const tbody = transactionTable.getElementsByTagName('tbody')[0];
+                            if (!tbody) {
+                                console.error('找不到交易紀錄表格的 tbody');
+                                return;
+                            }
+
+                            const rows = tbody.getElementsByTagName('tr');
+                            console.log(`處理 ${rows.length} 行交易紀錄數據`);
+
+                            // 遍历每一行进行过滤
+                            for (let row of rows) {
+                                    const orderNumber = row.cells[0]?.textContent?.toLowerCase() || '';
+                                    const partCode = row.cells[3]?.textContent?.toLowerCase() || '';
+                                    const operatorName = row.cells[6]?.textContent?.toLowerCase() || '';
+                                    const orderType = row.cells[1]?.textContent?.toLowerCase() || '';
+
+                                // 检查是否匹配搜索条件
+                                const matchSearch = !searchTerm ||
+                                    orderNumber.includes(searchTerm) ||
+                                    partCode.includes(searchTerm) ||
+                                    operatorName.includes(searchTerm);
+
+                                // 检查是否匹配过滤条件
+                                const matchesFilter = filterValue === 'all' ||
+                                         (filterValue === 'inbound' && orderType.includes('inbound')) ||
+                                         (filterValue === 'outbound' && orderType.includes('outbound'));
+
+                                // 如果同时匹配搜索和过滤条件，显示该行
+                                if (matchSearch && matchesFilter) {
+                                    row.style.display = '';
+                                    visibleCount++;
+                                    // 如果有搜索关键字，高亮显示匹配的文本
+                                    if (searchTerm) {
+                                        highlightText(row, searchTerm);
+                                    } else {
+                                        removeHighlights(row);
+                                    }
+                                } else {
+                                    // 不匹配條件，隱藏該行并移除高亮
+                                    row.style.display = 'none';
+                                    removeHighlights(row);
+                                }
+                            }
+
+                            // 更新顯示的庫存項目數量
+                            const transactionCountElements = document.querySelectorAll('.card-header .badge');
+                            if (transactionCountElements) {
+                                transactionCountElements.textContent = `Total: ${visibleCount} items`;
+                            }
+
+                            console.log(`交易紀錄搜索完成，顯示 ${visibleCount} 個紀錄`);
+                        }
+                    } catch (error) {
+                        console.error('交易紀錄搜索错误:', error);
+                    }
+                }
+
+
+
+
+
+                // ================================
+            // 高亮文本函數
+            // 功能：在元素中高亮顯示匹配的搜索關鍵字
+            // ================================
+
+                 function highlightText(element, searchTerm) {
+                    // 創建 TreeWalker 用於遍歷元素中的所有文本節點
+                    // TreeWalker 是一個DOM API，用於遍歷文檔樹中的節點
+                    const walker = document.createTreeWalker(
+                        element,                     // 要遍歷的根元素
+                        NodeFilter.SHOW_TEXT,        // 只顯示文本節點
+                        null,                        // 過濾器（null表示不過濾）
+                        false                        // 不擴展實體引用
+                    );
+
+                    let node;
+                    const nodes = [];  // 存儲所有文本節點的數組
+
+                    // 遍歷所有文本節點並收集到數組中
+                    while (node = walker.nextNode()) {
+                        nodes.push(node);
+                    }
+
+                    // 對每個文本節點進行處理
+                    nodes.forEach(textNode => {
+                        const parent = textNode.parentNode;  // 文本節點的父元素
+
+                        // 如果父元素已經是highlighted的節點，則跳過（避免重複處理）
+                        if (parent.classList && parent.classList.contains('search-highlight')) {
+                            return;
+                        }
+
+                        const text = textNode.textContent;      // 文本內容
+                        const lowerText = text.toLowerCase();   // 轉為小寫用於比較
+                        const index = lowerText.indexOf(searchTerm);  // 查找搜索關鍵字的位置
+
+                        // 如果找到匹配的文本
+                        if (index > -1) {
+                            // 將文本分割為三部分：匹配前、匹配內容、匹配後
+                            const before = text.substring(0, index);
+                            const match = text.substring(index, index + searchTerm.length);
+                            const after = text.substring(index + searchTerm.length);
+
+                            // 創建三個新的DOM節點
+                            const beforeNode = document.createTextNode(before);           // 匹配前的文本節點
+                            const highlightNode = document.createElement('span');         // 高亮節點
+                            highlightNode.className = 'search-highlight';                 // 添加高亮樣式類
+                            highlightNode.textContent = match;                            // 設置高亮內容
+                            const afterNode = document.createTextNode(after);             // 匹配後的文本節點
+
+                            // 用新的節點替換原來的文本節點
+                            parent.replaceChild(beforeNode, textNode);                    // 替換原文本節點為匹配前節點
+                            parent.insertBefore(highlightNode, beforeNode.nextSibling);   // 在匹配前節點後插入高亮節點
+                            parent.insertBefore(afterNode, highlightNode.nextSibling);    // 在高亮節點後插入匹配後節點
+                        }
+                    });
+                }
+
+                // ================================
+                // 移除高亮函數
+                // 功能：移除元素中的所有高亮效果
+                // ================================
+                function removeHighlights(element) {
+                    // 查找元素中所有的高亮節點
+                    const highlights = element.querySelectorAll('.search-highlight');
+
+                    // 遍歷每個高亮節點並恢復為普通文本
+                    highlights.forEach(highlight => {
+                        const parent = highlight.parentNode;                    // 高亮節點的父元素
+                        const text = document.createTextNode(highlight.textContent);  // 創建普通文本節點
+                        parent.replaceChild(text, highlight);                  // 用文本節點替換高亮節點
+                        parent.normalize(); // 合併相鄰的文本節點（清理DOM）
+                    });
+                }
+
+
+
+        // 導航功能
+        //點擊Inventory Management 跳轉到Inbound&Outbound.cshtml
+         function goToInventory_Management(){
+                   window.location.href = '@Url.Action("Inbound_Outbound", "Home")'//表示跳轉到Home/Inbound_Outbound.cshtml
+         }
+
+        function goToDashboard() {
+              window.location.href = '@Url.Action("Dashboard", "Home")';
+        }
+
+
+        function goToSuppliers() {
+            window.location.href = '@Url.Action("Suppliers", "Home")';
+        }
+
+        function goToReports() {
+            window.location.href = '@Url.Action("Reports", "Home")';
+        }
+
+
+        // 用戶菜單功能
+        function goToEditProfile() {
+            window.location.href = '@Url.Action("Edit_Profile", "Account")';
+        }
+
+        function goToChangePassword() {
+            window.location.href = '@Url.Action("Change_Password", "Account")';
+        }
+
+        // 確認登出
+        function logout() {
+            if (confirm("Are you sure you want to logout?")) {
+                document.getElementById('logoutForm').submit();
+            }
+        }
+
+
+
+        // 顯示成功或錯誤消息
+        @if (TempData["SuccessMessage"] != null)
+        {
+                    <text>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        alert('@TempData["SuccessMessage"]');
+                    });
+                    </text>
+        }
+
+        @if (TempData["ErrorMessage"] != null)
+        {
+                    <text>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        alert('@TempData["ErrorMessage"]');
+                    });
+                    </text>
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,421 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|d:\\c# \u5B78\u7FD2\u6210\u679C\\lhp_inventory_management_system_mvc\\lhp_inventory_management_system_mvc\\views\\account\\edit_profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|solutionrelative:lhp_inventory_management_system_mvc\\views\\account\\edit_profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|d:\\c# \u5B78\u7FD2\u6210\u679C\\lhp_inventory_management_system_mvc\\lhp_inventory_management_system_mvc\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|solutionrelative:lhp_inventory_management_system_mvc\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|d:\\c# \u5B78\u7FD2\u6210\u679C\\lhp_inventory_management_system_mvc\\lhp_inventory_management_system_mvc\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|solutionrelative:lhp_inventory_management_system_mvc\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|d:\\c# \u5B78\u7FD2\u6210\u679C\\lhp_inventory_management_system_mvc\\lhp_inventory_management_system_mvc\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|solutionrelative:lhp_inventory_management_system_mvc\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|d:\\c# \u5B78\u7FD2\u6210\u679C\\lhp_inventory_management_system_mvc\\lhp_inventory_management_system_mvc\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|solutionrelative:lhp_inventory_management_system_mvc\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|d:\\c# \u5B78\u7FD2\u6210\u679C\\lhp_inventory_management_system_mvc\\lhp_inventory_management_system_mvc\\models\\change_password.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|solutionrelative:lhp_inventory_management_system_mvc\\models\\change_password.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|d:\\c# \u5B78\u7FD2\u6210\u679C\\lhp_inventory_management_system_mvc\\lhp_inventory_management_system_mvc\\models\\dashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|solutionrelative:lhp_inventory_management_system_mvc\\models\\dashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|d:\\c# \u5B78\u7FD2\u6210\u679C\\lhp_inventory_management_system_mvc\\lhp_inventory_management_system_mvc\\views\\account\\change_password - \u590D\u5236.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|solutionrelative:lhp_inventory_management_system_mvc\\views\\account\\change_password - \u590D\u5236.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|d:\\c# \u5B78\u7FD2\u6210\u679C\\lhp_inventory_management_system_mvc\\lhp_inventory_management_system_mvc\\views\\home\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|solutionrelative:lhp_inventory_management_system_mvc\\views\\home\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|d:\\c# \u5B78\u7FD2\u6210\u679C\\lhp_inventory_management_system_mvc\\lhp_inventory_management_system_mvc\\views\\home\\inbound_outbound.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|solutionrelative:lhp_inventory_management_system_mvc\\views\\home\\inbound_outbound.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|d:\\c# \u5B78\u7FD2\u6210\u679C\\lhp_inventory_management_system_mvc\\lhp_inventory_management_system_mvc\\data\\partrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|solutionrelative:lhp_inventory_management_system_mvc\\data\\partrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|d:\\c# \u5B78\u7FD2\u6210\u679C\\lhp_inventory_management_system_mvc\\lhp_inventory_management_system_mvc\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|solutionrelative:lhp_inventory_management_system_mvc\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|d:\\c# \u5B78\u7FD2\u6210\u679C\\lhp_inventory_management_system_mvc\\lhp_inventory_management_system_mvc\\data\\orderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|solutionrelative:lhp_inventory_management_system_mvc\\data\\orderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|d:\\c# \u5B78\u7FD2\u6210\u679C\\lhp_inventory_management_system_mvc\\lhp_inventory_management_system_mvc\\controllers\\inventoryapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|solutionrelative:lhp_inventory_management_system_mvc\\controllers\\inventoryapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|d:\\c# \u5B78\u7FD2\u6210\u679C\\lhp_inventory_management_system_mvc\\lhp_inventory_management_system_mvc\\views\\home\\index - \u590D\u5236.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|solutionrelative:lhp_inventory_management_system_mvc\\views\\home\\index - \u590D\u5236.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|d:\\c# \u5B78\u7FD2\u6210\u679C\\lhp_inventory_management_system_mvc\\lhp_inventory_management_system_mvc\\views\\home\\dashboard - \u590D\u5236.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|solutionrelative:lhp_inventory_management_system_mvc\\views\\home\\dashboard - \u590D\u5236.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|d:\\c# \u5B78\u7FD2\u6210\u679C\\lhp_inventory_management_system_mvc\\lhp_inventory_management_system_mvc\\models\\parts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|solutionrelative:lhp_inventory_management_system_mvc\\models\\parts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|d:\\c# \u5B78\u7FD2\u6210\u679C\\lhp_inventory_management_system_mvc\\lhp_inventory_management_system_mvc\\models\\orders.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|solutionrelative:lhp_inventory_management_system_mvc\\models\\orders.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|d:\\c# \u5B78\u7FD2\u6210\u679C\\lhp_inventory_management_system_mvc\\lhp_inventory_management_system_mvc\\data\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|solutionrelative:lhp_inventory_management_system_mvc\\data\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|d:\\c# \u5B78\u7FD2\u6210\u679C\\lhp_inventory_management_system_mvc\\lhp_inventory_management_system_mvc\\data\\databaseconnector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|solutionrelative:lhp_inventory_management_system_mvc\\data\\databaseconnector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|d:\\c# \u5B78\u7FD2\u6210\u679C\\lhp_inventory_management_system_mvc\\lhp_inventory_management_system_mvc\\models\\editprofileviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|solutionrelative:lhp_inventory_management_system_mvc\\models\\editprofileviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|d:\\c# \u5B78\u7FD2\u6210\u679C\\lhp_inventory_management_system_mvc\\lhp_inventory_management_system_mvc\\models\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|solutionrelative:lhp_inventory_management_system_mvc\\models\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|d:\\c# \u5B78\u7FD2\u6210\u679C\\lhp_inventory_management_system_mvc\\lhp_inventory_management_system_mvc\\models\\partstransaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|solutionrelative:lhp_inventory_management_system_mvc\\models\\partstransaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|d:\\c# \u5B78\u7FD2\u6210\u679C\\lhp_inventory_management_system_mvc\\lhp_inventory_management_system_mvc\\data\\hash.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|solutionrelative:lhp_inventory_management_system_mvc\\data\\hash.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|d:\\c# \u5B78\u7FD2\u6210\u679C\\lhp_inventory_management_system_mvc\\lhp_inventory_management_system_mvc\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{64EC1216-AB12-4762-912D-AEC2BE9F20CE}|LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC.csproj|solutionrelative:lhp_inventory_management_system_mvc\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "LHP_Inventory_management_system_MVC\\Controllers\\AccountController.cs",
+              "ToolTip": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "LHP_Inventory_management_system_MVC\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAAEsBAAAAAAAAAAAswGoBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-14T07:03:37.337Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Edit_Profile.cshtml",
+              "DocumentMoniker": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Views\\Account\\Edit_Profile.cshtml",
+              "RelativeDocumentMoniker": "LHP_Inventory_management_system_MVC\\Views\\Account\\Edit_Profile.cshtml",
+              "ToolTip": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Views\\Account\\Edit_Profile.cshtml",
+              "RelativeToolTip": "LHP_Inventory_management_system_MVC\\Views\\Account\\Edit_Profile.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAABqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-21T02:58:39.298Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Views\\Account\\Login.cshtml",
+              "RelativeDocumentMoniker": "LHP_Inventory_management_system_MVC\\Views\\Account\\Login.cshtml",
+              "ToolTip": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Views\\Account\\Login.cshtml",
+              "RelativeToolTip": "LHP_Inventory_management_system_MVC\\Views\\Account\\Login.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-14T05:28:41.27Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Register.cshtml",
+              "DocumentMoniker": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Views\\Account\\Register.cshtml",
+              "RelativeDocumentMoniker": "LHP_Inventory_management_system_MVC\\Views\\Account\\Register.cshtml",
+              "ToolTip": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Views\\Account\\Register.cshtml",
+              "RelativeToolTip": "LHP_Inventory_management_system_MVC\\Views\\Account\\Register.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-14T08:18:19.661Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "LHP_Inventory_management_system_MVC\\Controllers\\HomeController.cs",
+              "ToolTip": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "LHP_Inventory_management_system_MVC\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAANoBAAAAAAAAAAAqwJEAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-15T03:08:54.911Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Change_Password.cs",
+              "DocumentMoniker": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Models\\Change_Password.cs",
+              "RelativeDocumentMoniker": "LHP_Inventory_management_system_MVC\\Models\\Change_Password.cs",
+              "ToolTip": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Models\\Change_Password.cs",
+              "RelativeToolTip": "LHP_Inventory_management_system_MVC\\Models\\Change_Password.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T03:47:33.748Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DashboardViewModel.cs",
+              "DocumentMoniker": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Models\\DashboardViewModel.cs",
+              "RelativeDocumentMoniker": "LHP_Inventory_management_system_MVC\\Models\\DashboardViewModel.cs",
+              "ToolTip": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Models\\DashboardViewModel.cs",
+              "RelativeToolTip": "LHP_Inventory_management_system_MVC\\Models\\DashboardViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-15T03:12:57.989Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Change_Password - \u590D\u5236.cshtml",
+              "DocumentMoniker": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Views\\Account\\Change_Password - \u590D\u5236.cshtml",
+              "RelativeDocumentMoniker": "LHP_Inventory_management_system_MVC\\Views\\Account\\Change_Password - \u590D\u5236.cshtml",
+              "ToolTip": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Views\\Account\\Change_Password - \u590D\u5236.cshtml",
+              "RelativeToolTip": "LHP_Inventory_management_system_MVC\\Views\\Account\\Change_Password - \u590D\u5236.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-21T08:47:52.455Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "OrderRepository.cs",
+              "DocumentMoniker": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Data\\OrderRepository.cs",
+              "RelativeDocumentMoniker": "LHP_Inventory_management_system_MVC\\Data\\OrderRepository.cs",
+              "ToolTip": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Data\\OrderRepository.cs",
+              "RelativeToolTip": "LHP_Inventory_management_system_MVC\\Data\\OrderRepository.cs",
+              "ViewState": "AgIAAE0AAAAAAAAAAAAQwFcAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T09:12:40.289Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "PartRepository.cs",
+              "DocumentMoniker": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Data\\PartRepository.cs",
+              "RelativeDocumentMoniker": "LHP_Inventory_management_system_MVC\\Data\\PartRepository.cs",
+              "ToolTip": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Data\\PartRepository.cs",
+              "RelativeToolTip": "LHP_Inventory_management_system_MVC\\Data\\PartRepository.cs",
+              "ViewState": "AgIAAAwCAAAAAAAAAAAuwCECAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-12T03:18:33.158Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Inbound_Outbound.cshtml",
+              "DocumentMoniker": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Views\\Home\\Inbound_Outbound.cshtml",
+              "RelativeDocumentMoniker": "LHP_Inventory_management_system_MVC\\Views\\Home\\Inbound_Outbound.cshtml",
+              "ToolTip": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Views\\Home\\Inbound_Outbound.cshtml",
+              "RelativeToolTip": "LHP_Inventory_management_system_MVC\\Views\\Home\\Inbound_Outbound.cshtml",
+              "ViewState": "AgIAADsHAAAAAAAAAAAAAEcHAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-21T03:55:57.104Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "DashBoard.cshtml",
+              "DocumentMoniker": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Views\\Home\\DashBoard.cshtml",
+              "RelativeDocumentMoniker": "LHP_Inventory_management_system_MVC\\Views\\Home\\DashBoard.cshtml",
+              "ToolTip": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Views\\Home\\DashBoard.cshtml",
+              "RelativeToolTip": "LHP_Inventory_management_system_MVC\\Views\\Home\\DashBoard.cshtml",
+              "ViewState": "AgIAAHADAAAAAAAAAADwv4YDAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-26T08:41:19.887Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\appsettings.json",
+              "RelativeDocumentMoniker": "LHP_Inventory_management_system_MVC\\appsettings.json",
+              "ToolTip": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\appsettings.json",
+              "RelativeToolTip": "LHP_Inventory_management_system_MVC\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-10-12T03:24:24.785Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "InventoryApiController.cs",
+              "DocumentMoniker": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Controllers\\InventoryApiController.cs",
+              "RelativeDocumentMoniker": "LHP_Inventory_management_system_MVC\\Controllers\\InventoryApiController.cs",
+              "ToolTip": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Controllers\\InventoryApiController.cs",
+              "RelativeToolTip": "LHP_Inventory_management_system_MVC\\Controllers\\InventoryApiController.cs",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAQwA0AAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-18T03:27:32.777Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Index - \u590D\u5236.cshtml",
+              "DocumentMoniker": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Views\\Home\\Index - \u590D\u5236.cshtml",
+              "RelativeDocumentMoniker": "LHP_Inventory_management_system_MVC\\Views\\Home\\Index - \u590D\u5236.cshtml",
+              "ToolTip": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Views\\Home\\Index - \u590D\u5236.cshtml",
+              "RelativeToolTip": "LHP_Inventory_management_system_MVC\\Views\\Home\\Index - \u590D\u5236.cshtml",
+              "ViewState": "AgIAADwCAAAAAAAAAAAkwE4CAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-21T02:36:25.155Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Parts.cs",
+              "DocumentMoniker": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Models\\Parts.cs",
+              "RelativeDocumentMoniker": "LHP_Inventory_management_system_MVC\\Models\\Parts.cs",
+              "ToolTip": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Models\\Parts.cs",
+              "RelativeToolTip": "LHP_Inventory_management_system_MVC\\Models\\Parts.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-12T03:18:53.776Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "DashBoard - \u590D\u5236.cshtml",
+              "DocumentMoniker": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Views\\Home\\DashBoard - \u590D\u5236.cshtml",
+              "RelativeDocumentMoniker": "LHP_Inventory_management_system_MVC\\Views\\Home\\DashBoard - \u590D\u5236.cshtml",
+              "ToolTip": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Views\\Home\\DashBoard - \u590D\u5236.cshtml",
+              "RelativeToolTip": "LHP_Inventory_management_system_MVC\\Views\\Home\\DashBoard - \u590D\u5236.cshtml",
+              "ViewState": "AgIAABoEAAAAAAAAAAAmwEUEAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-20T01:59:46.719Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Orders.cs",
+              "DocumentMoniker": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Models\\Orders.cs",
+              "RelativeDocumentMoniker": "LHP_Inventory_management_system_MVC\\Models\\Orders.cs",
+              "ToolTip": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Models\\Orders.cs",
+              "RelativeToolTip": "LHP_Inventory_management_system_MVC\\Models\\Orders.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAUwDEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T05:46:54.601Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Data\\UserRepository.cs",
+              "RelativeDocumentMoniker": "LHP_Inventory_management_system_MVC\\Data\\UserRepository.cs",
+              "ToolTip": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Data\\UserRepository.cs",
+              "RelativeToolTip": "LHP_Inventory_management_system_MVC\\Data\\UserRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-14T06:21:10.514Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "DatabaseConnector.cs",
+              "DocumentMoniker": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Data\\DatabaseConnector.cs",
+              "RelativeDocumentMoniker": "LHP_Inventory_management_system_MVC\\Data\\DatabaseConnector.cs",
+              "ToolTip": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Data\\DatabaseConnector.cs",
+              "RelativeToolTip": "LHP_Inventory_management_system_MVC\\Data\\DatabaseConnector.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-12T03:24:33.041Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Users.cs",
+              "DocumentMoniker": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Models\\Users.cs",
+              "RelativeDocumentMoniker": "LHP_Inventory_management_system_MVC\\Models\\Users.cs",
+              "ToolTip": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Models\\Users.cs",
+              "RelativeToolTip": "LHP_Inventory_management_system_MVC\\Models\\Users.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAgwBMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-12T03:18:58.566Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Hash.cs",
+              "DocumentMoniker": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Data\\Hash.cs",
+              "RelativeDocumentMoniker": "LHP_Inventory_management_system_MVC\\Data\\Hash.cs",
+              "ToolTip": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Data\\Hash.cs",
+              "RelativeToolTip": "LHP_Inventory_management_system_MVC\\Data\\Hash.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-14T05:55:54.643Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "EditProfileViewModel.cs",
+              "DocumentMoniker": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Models\\EditProfileViewModel.cs",
+              "RelativeDocumentMoniker": "LHP_Inventory_management_system_MVC\\Models\\EditProfileViewModel.cs",
+              "ToolTip": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Models\\EditProfileViewModel.cs",
+              "RelativeToolTip": "LHP_Inventory_management_system_MVC\\Models\\EditProfileViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T10:03:41.3Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "PartsTransaction.cs",
+              "DocumentMoniker": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Models\\PartsTransaction.cs",
+              "RelativeDocumentMoniker": "LHP_Inventory_management_system_MVC\\Models\\PartsTransaction.cs",
+              "ToolTip": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Models\\PartsTransaction.cs",
+              "RelativeToolTip": "LHP_Inventory_management_system_MVC\\Models\\PartsTransaction.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-12T03:18:55.208Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Privacy.cshtml",
+              "DocumentMoniker": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Views\\Home\\Privacy.cshtml",
+              "RelativeDocumentMoniker": "LHP_Inventory_management_system_MVC\\Views\\Home\\Privacy.cshtml",
+              "ToolTip": "D:\\C# \u5B78\u7FD2\u6210\u679C\\LHP_Inventory_management_system_MVC\\LHP_Inventory_management_system_MVC\\Views\\Home\\Privacy.cshtml",
+              "RelativeToolTip": "LHP_Inventory_management_system_MVC\\Views\\Home\\Privacy.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-12T03:24:20.512Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

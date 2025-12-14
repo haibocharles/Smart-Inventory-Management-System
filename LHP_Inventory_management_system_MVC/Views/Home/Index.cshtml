@@ -1,0 +1,690 @@
+﻿@model IEnumerable<LHP_Inventory_management_system_MVC.Models.Parts>
+@{
+    Layout = null; // 移除布局文件，创建独立页面
+    ViewData["Title"] = "Inventory Management System";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            /* 淺色系高級配色 */
+            --bg-body: #f8fafc; /* 極淺灰藍 */
+            --bg-card: #ffffff;
+            --primary: #4f46e5; /* Indigo 600 - 專業感強的主色 */
+            --primary-light: #eef2ff;
+            --text-dark: #0f172a; /* Slate 900 - 接近黑色的深藍 */
+            --text-secondary: #64748b; /* Slate 500 */
+            /* 狀態色 */
+            --success-bg: #ecfdf5;
+            --success-text: #059669;
+            --danger-bg: #fef2f2;
+            --danger-text: #dc2626;
+            --warning-bg: #fffbeb;
+            --warning-text: #d97706;
+            /* 高級感陰影 (Soft & Deep) */
+            --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
+            --shadow-navbar: 0 4px 20px rgba(0,0,0,0.02);
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            min-height: 100vh;
+            padding-bottom: 40px;
+            /* 背景裝飾：極淡的漸層光暈 */
+            background-image: radial-gradient(circle at 0% 0%, #f1f5f9 0%, transparent 50%), radial-gradient(circle at 100% 0%, #e0e7ff 0%, transparent 30%);
+            background-attachment: fixed;
+        }
+
+        /* --- 導航欄 (懸浮白條) --- */
+        .navbar-premium {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.03);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-navbar);
+        }
+
+        .nav-link-custom {
+            color: var(--text-secondary);
+            font-weight: 600;
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            margin: 0 4px;
+        }
+
+            .nav-link-custom:hover, .nav-link-custom.active {
+                background-color: var(--primary-light);
+                color: var(--primary);
+            }
+
+        /* --- 卡片通用樣式 (Clean & Float) --- */
+        .premium-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid #f1f5f9; /* 極細邊框 */
+            padding: 1.75rem;
+            box-shadow: var(--shadow-card);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .premium-card:hover {
+                transform: translateY(-5px);
+                box-shadow: var(--shadow-hover);
+                border-color: #e2e8f0;
+            }
+
+        /* --- 歡迎區塊 (簡潔大氣) --- */
+        .welcome-header {
+            margin: 2.5rem 0;
+            padding: 0 1rem;
+        }
+
+        .welcome-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            letter-spacing: -0.5px;
+        }
+
+        .welcome-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        /* --- 內容區塊標題 --- */
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- 表格樣式 (Modern Clean) --- */
+        .table-premium {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+            .table-premium th {
+                background: #f8fafc;
+                color: var(--text-secondary);
+                font-weight: 600;
+                text-transform: uppercase;
+                font-size: 0.75rem;
+                padding: 1rem 1.5rem;
+                border-top: 1px solid #f1f5f9;
+                border-bottom: 1px solid #f1f5f9;
+                letter-spacing: 0.05em;
+            }
+
+            .table-premium td {
+                padding: 1.25rem 1.5rem;
+                border-bottom: 1px solid #f8fafc;
+                vertical-align: middle;
+                color: var(--text-dark);
+                font-weight: 500;
+            }
+
+            .table-premium tr:hover td {
+                background-color: #f8fafc; /* Hover 變灰底 */
+            }
+
+        /* 庫存徽章 */
+        .stock-badge {
+            padding: 5px 12px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .badge-ok {
+            background: var(--success-bg);
+            color: var(--success-text);
+        }
+
+        .badge-low {
+            background: var(--danger-bg);
+            color: var(--danger-text);
+        }
+
+        /* 按鈕與分頁 */
+        .btn-circle {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid #e2e8f0;
+            background: white;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+            .btn-circle:hover:not(:disabled) {
+                border-color: var(--primary);
+                color: var(--primary);
+                background: var(--primary-light);
+            }
+
+        .btn-primary-glow {
+            background: var(--primary);
+            border: none;
+            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.4);
+            transition: 0.3s;
+            border-radius: 10px;
+            padding: 10px 25px;
+            font-weight: 600;
+        }
+
+            .btn-primary-glow:hover {
+                background: #4338ca;
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(79, 70, 229, 0.6);
+            }
+
+        /* 搜索欄 */
+        .form-control {
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            background-color: #f8fafc;
+        }
+
+            .form-control:focus {
+                border-color: var(--primary);
+                box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+            }
+
+        .btn-outline-primary {
+            color: var(--primary);
+            border-color: var(--primary-light);
+            background: var(--primary-light);
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+            .btn-outline-primary:hover {
+                background-color: var(--primary);
+                color: white;
+                box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+            }
+
+        .btn-outline-secondary {
+            color: var(--text-secondary);
+            border-color: #e2e8f0;
+            background: white;
+            border-radius: 8px;
+        }
+
+            .btn-outline-secondary:hover {
+                background: #f8fafc;
+            }
+
+        .btn-outline-danger {
+            color: var(--danger-text);
+            border-color: var(--danger-bg);
+            background: var(--danger-bg);
+            border-radius: 6px;
+        }
+
+            .btn-outline-danger:hover {
+                background-color: var(--danger-text);
+                color: white;
+            }
+
+        /* Modal 美化 */
+        .modal-content {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .modal-header {
+            border-bottom: 1px solid #f0f0f0;
+            padding: 25px;
+        }
+
+        .modal-body, .modal-footer {
+            padding: 25px;
+        }
+
+        .modal-title {
+            font-weight: 700;
+        }
+
+        /* 滾動條美化 */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #94a3b8;
+            }
+
+        .premium-card, .navbar-premium {
+            overflow: visible !important;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-premium">
+        <div class="container-fluid" style="max-width: 1400px;">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+                <div style="width: 32px; height: 32px; background: var(--primary); border-radius: 8px; display:flex; align-items:center; justify-content:center; color:white;">
+                    <i class="fas fa-cube fa-sm"></i>
+                </div>
+                <span style="font-weight: 800; font-size: 1.2rem; color: var(--text-dark); letter-spacing: -0.5px;">IMS</span>
+            </a>
+
+            <div class="collapse navbar-collapse ms-4" id="navbarNav">
+                <ul class="navbar-nav gap-2">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom active" href="#" onclick="goToMainPage()">
+                            <i class="fas fa-chart-pie me-2"></i>Main page
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" href="#" onclick="goToDashboard()">
+                            <i class="fas fa-chart-pie me-2"></i>Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" href="#" onclick="goToInventory_Management()">
+                            <i class="fas fa-box me-2"></i>Inventory Management
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" href="#" onclick="goToReports()">
+                            <i class="fas fa-file-alt me-2"></i>Reports
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" href="#" onclick="goToSuppliers()">
+                            <i class="fas fa-file-alt me-2"></i>Supplier
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 用戶菜單 -->
+            <div class="dropdown ms-auto">
+                <a class="d-flex align-items-center text-decoration-none dropdown-toggle"
+                   id="userDropdown"
+                   data-bs-toggle="dropdown"
+                   aria-expanded="false"
+                   style="cursor: pointer;">
+                    <img src="~/images/default-avatar.jpg"
+                         alt="Avatar"
+                         class="rounded-circle me-2"
+                         width="42" height="42">
+                    <div class="text-start">
+                        <div class="fw-bold" style="font-size: 0.95rem;">@User.Identity?.Name</div>
+                        <div class="text-secondary small">Administrator</div>
+                    </div>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2" aria-labelledby="userDropdown">
+                    <li>
+                        <a class="dropdown-item py-2" href="javascript:void(0)" onclick="goToEditProfile()">
+                            <i class="fas fa-user-gear me-2"></i> Edit Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item py-2" href="javascript:void(0)" onclick="goToChangePassword()">
+                            <i class="fas fa-key me-2"></i> Change Password
+                        </a>
+                    </li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <a class="dropdown-item py-2 text-danger" href="javascript:void(0)" onclick="logout()">
+                            <i class="fas fa-right-from-bracket me-2"></i> Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid" style="max-width: 1400px;">
+        <!-- 標題部分 -->
+        <div class="d-flex flex-wrap justify-content-between align-items-end welcome-header">
+            <div>
+                <h1 class="welcome-title">Inventory Management System</h1>
+                <p class="welcome-subtitle">Efficiently manage your spare parts inventory</p>
+            </div>
+            <div>
+                <button class="btn btn-primary-glow rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#addPartModal">
+                    <i class="fas fa-plus me-2"></i>Add Part
+                </button>
+            </div>
+        </div>
+
+        <!-- 搜索栏 -->
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <form asp-action="Index" method="get" class="input-group">
+                    <input type="text" name="searchString" class="form-control"
+                           placeholder="Search by code, name or supplier..."
+                           value="@ViewData["CurrentFilter"]">
+                    <button class="btn btn-outline-primary" type="submit">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                    @if (!string.IsNullOrEmpty(ViewData["CurrentFilter"]?.ToString()))
+                    {
+                        <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
+                            <i class="fas fa-times"></i> Clear
+                        </a>
+                    }
+                </form>
+            </div>
+        </div>
+
+        <!-- 零件列表 -->
+        <div class="premium-card mb-5 p-0 overflow-hidden">
+            <div class="p-4 d-flex justify-content-between align-items-center border-bottom border-light">
+                <div class="section-title mb-0">
+                    <i class="fas fa-boxes me-2 text-primary"></i>
+                    Parts List
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                @if (Model.Any())
+                {
+                    <table class="table-premium" id="stockTable">
+                        <thead>
+                            <tr>
+                                <th style="padding-left: 2rem;">ID</th>
+                                <th>Code</th>
+                                <th>Name</th>
+                                <th>Supplier</th>
+                                <th>Min Stock</th>
+                                <th>Current Stock</th>
+                                <th style="padding-right: 2rem;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var part in Model.OrderBy(p => p.Id))
+                            {
+                                <tr class="stock-row">
+                                    <td style="padding-left: 2rem;">
+                                        <div class="fw-bold">@part.Id</div>
+                                    </td>
+                                    <td class="text-secondary">@part.Code</td>
+                                    <td>
+                                        <strong>@part.Name</strong>
+                                        @if (part.CurrentStock < part.MinStock)
+                                        {
+                                            <span class="stock-badge badge-low ms-1">Low Stock</span>
+                                        }
+                                    </td>
+                                    <td>@part.Supplier</td>
+                                    <td>@part.MinStock</td>
+                                    <td>
+                                        <span class="@(part.CurrentStock < part.MinStock ? "text-danger fw-bold" : "")">
+                                            @part.CurrentStock
+                                        </span>
+                                    </td>
+                                    <td style="padding-right: 2rem;">
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <button type="button" class="btn btn-outline-primary"
+                                                    data-bs-toggle="modal" data-bs-target="#EditePartModal"
+                                                    onclick="loadPartData(@part.Id)">
+                                                <i class="fas fa-edit"></i> Edit
+                                            </button>
+                                            <button type="button" class="btn btn-outline-danger"
+                                                    onclick="submitDeleteForm(@part.Id, '@part.Name.Replace("'", "&#39;")')">
+                                                <i class="fas fa-trash"></i> Delete
+                                            </button>
+                                            <form id="deleteForm" asp-action="Delete_Parts" method="post" style="display: none;">
+                                                <input type="hidden" name="id" id="deletePartId" />
+                                                @Html.AntiForgeryToken()
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div class="text-center py-4">
+                        <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">No parts found</p>
+                        <button type="button" class="btn btn-primary-glow" data-bs-toggle="modal" data-bs-target="#addPartModal">
+                            <i class="fas fa-plus"></i> Add First Part
+                        </button>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- 添加零件模态框 -->
+        <div class="modal fade" id="addPartModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add New Part</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <form asp-action="Create_Parts" method="post">
+                        <div class="modal-body">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <div class="mb-3">
+                                <label for="Code" class="form-label">Part Code</label>
+                                <input type="text" class="form-control" id="Code" name="Code" required>
+                                <span class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="Name" class="form-label">Part Name</label>
+                                <input type="text" class="form-control" id="Name" name="Name" required>
+                                <span class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="Supplier" class="form-label">Supplier</label>
+                                <input type="text" class="form-control" id="Supplier" name="Supplier">
+                                <span class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="MinStock" class="form-label">Minimum Stock</label>
+                                <input type="number" class="form-control" id="MinStock" name="MinStock" min="0" required>
+                                <span class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- 编辑零件模态框 -->
+        <div class="modal fade" id="EditePartModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Part</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <form asp-action="Edits_Parts" method="post">
+                        <input type="hidden" id="Edit_Id" name="Id" />
+                        <div class="modal-body">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="mb-3">
+                                <label for="Edit_Code" class="form-label">Part Code</label>
+                                <input type="text" class="form-control" id="Edit_Code" name="Code" required>
+                                <span class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="Edit_Name" class="form-label">Part Name</label>
+                                <input type="text" class="form-control" id="Edit_Name" name="Name" required>
+                                <span class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="Edit_Supplier" class="form-label">Supplier</label>
+                                <input type="text" class="form-control" id="Edit_Supplier" name="Supplier">
+                                <span class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="Edit_MinStock" class="form-label">Minimum Stock</label>
+                                <input type="number" class="form-control" id="Edit_MinStock" name="MinStock" min="0" required>
+                                <span class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- 登出表单 -->
+    <form id="logoutForm" asp-action="logout" asp-controller="Account" method="post" style="display:none;">
+        @Html.AntiForgeryToken()  <!-- 防偽令牌 -->
+    </form>
+    <script>
+         // 加载零件数据到编辑模态框
+         function loadPartData(partId) {
+             fetch(`/Home/GetPartData?id=${partId}`)
+                 .then(response => {
+                     if (!response.ok) {
+                         throw new Error('Network response was not ok');
+                     }
+                     return response.json();
+                 })
+                 .then(data => {
+                     // 填充表单数据
+                     document.getElementById('Edit_Id').value = data.id;
+                     document.getElementById('Edit_Code').value = data.code;
+                     document.getElementById('Edit_Name').value = data.name;
+                     document.getElementById('Edit_Supplier').value = data.supplier;
+                     document.getElementById('Edit_MinStock').value = data.minStock;
+                 })
+                 .catch(error => {
+                     console.error('Error loading part data:', error);
+                     alert('无法加载零件数据，请稍后重试');
+                 });
+         }
+
+         // 显示成功或错误消息
+         @if (TempData["SuccessMessage"] != null)
+         {
+                                     <text>
+                                     document.addEventListener('DOMContentLoaded', function() {
+                                         alert('@TempData["SuccessMessage"]');
+                                     });
+                                     </text>
+         }
+
+         @if (TempData["ErrorMessage"] != null)
+         {
+                                     <text>
+                                     document.addEventListener('DOMContentLoaded', function() {
+                                         alert('@TempData["ErrorMessage"]');
+                                     });
+                                     </text>
+         }
+
+         //確認登出
+         function logout()
+         {
+             if(confirm("Are you sure you want to logout?"))
+              {
+
+                   document.getElementById('logoutForm').submit();//提交後登出
+              }
+         }
+
+
+         // 确认删除零件
+         function submitDeleteForm(id, name) {
+             if (confirm(`Are you sure you want to delete "${name}"?\nThis action cannot be undone.`)) {
+                 document.getElementById('deletePartId').value = id;
+                 document.getElementById('deleteForm').submit();
+             }
+         }
+
+        //點擊Edit Profile 跳轉到Edit_profile.cshtml
+        function goToEditProfile() {
+             window.location.href = '@Url.Action("Edit_Profile", "Account")';//表示跳轉到Account/Edit_Profile.cshtml
+          }
+
+
+        //點擊Change Password 跳轉到Change_Password.cshtml
+          function goToChangePassword(){
+              window.location.href = '@Url.Action("Change_Password", "Account")';//表示跳轉到Account/Change_Password.cshtml
+         }
+
+         //點擊Inventory Management 跳轉到Inbound&Outbound.cshtml
+          function goToInventory_Management(){
+               window.location.href = '@Url.Action("Inbound_Outbound", "Home")'//表示跳轉到Home/Inbound_Outbound.cshtml
+          }
+
+        
+
+        function goToDashboard() {
+              window.location.href = '@Url.Action("Dashboard", "Home")';
+        }
+
+        function goToMainPage() {
+              window.location.reload();
+        }
+
+        function goToReports() {
+            alert('Reports page coming soon!');
+        }
+
+        function goToSuppliers() {
+            alert('Suppliers page coming soon!');
+        }
+    </script>
+</body>
+</html>
