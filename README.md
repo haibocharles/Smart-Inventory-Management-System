@@ -69,9 +69,8 @@ This improves security awareness in account system development and avoids storin
 
 - **Backend:** C#, ASP.NET Core MVC
 - **Frontend:** Razor Views, HTML, CSS
-- **Database:** SQL Server
+- **Database:** MSSQL Server
 - **Architecture:** MVC + Repository + Service
-- **Development Tools:** Visual Studio, Git, GitHub
 
 ## Project Structure
 
