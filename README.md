@@ -72,6 +72,13 @@ This improves security awareness in account system development and avoids storin
 - **Database:** MSSQL Server
 - **Architecture:** MVC + Repository + Service
 
+## Screenshots
+
+### Main Pagee
+![image]((https://github.com/haibocharles/Smart-Inventory-Management-System/blob/main/LHP_Inventory_management_system_MVC/Screenshot/Main_page.png))
+
+
+
 ## Project Structure
 
 ```text
@@ -122,10 +129,7 @@ LHP_Inventory_management_system_MVC
 ├── appsettings.json
 └── Program.cs
 
-## Screenshots
 
-### Main Pagee
-![image]([https://raw.githubusercontent.com/haibocharles/Smart-Inventory-Management-System/main/LHP_Inventory_management_system_MVC/Screenshot/Main_page.png](https://github.com/haibocharles/Smart-Inventory-Management-System/blob/main/LHP_Inventory_management_system_MVC/Screenshot/Main_page.png))
 
 
 
