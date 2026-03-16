@@ -22,11 +22,9 @@ The goal of this project is not only to implement CRUD operations, but also to b
 The system includes a basic account module that allows users to:
 
 - register an account
-- log in to the system
+- log in to the system / log out to the system
 - edit profile information
 - change password securely
-
-This module helps simulate real-world user access and account maintenance scenarios.
 
 ### 2. Parts Management
 Users can manage part records in the system, including:
