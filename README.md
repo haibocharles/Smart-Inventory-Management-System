@@ -73,7 +73,8 @@ This improves security awareness in account system development and avoids storin
 - **Architecture:** MVC + Repository + Service
 
 ## Screenshots
-
+### Login
+![Main Page](LHP_Inventory_management_system_MVC/Screenshot/Login.png)
 ### Main Page
 ![Main Page](LHP_Inventory_management_system_MVC/Screenshot/Main_page.png)
 ### Dashboard
@@ -81,7 +82,10 @@ This improves security awareness in account system development and avoids storin
 ![Dashboard2](LHP_Inventory_management_system_MVC/Screenshot/Dashboard2.png)
 ### Inventory Management
 ![InventoryManagement](LHP_Inventory_management_system_MVC/Screenshot/inventory_management.png)
-
+### Change Password
+![Change Password](LHP_Inventory_management_system_MVC/Screenshot/Change_password.png)
+### Edit_Profile
+![Edit_Profile](LHP_Inventory_management_system_MVC/Screenshot/Edit_Profile.png)
 ## Project Structure
 
 ```text
