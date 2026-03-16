@@ -32,7 +32,7 @@ Users can manage part records in the system, including:
 - adding new parts
 - editing existing parts
 - deleting parts
-- viewing part information
+- searching/viewing part information
 
 This module serves as the foundation of the inventory system.
 
