@@ -1,4 +1,6 @@
 ﻿using LHP_Inventory_management_system_MVC.Models;
+using LHP_Inventory_management_system_MVC.Service;
+using Microsoft.AspNetCore.Identity;
 using MySql.Data.MySqlClient;
 using System.Data.Common;
 using System.Transactions;
@@ -9,16 +11,23 @@ namespace LHP_Inventory_management_system_MVC.Data
     public class UserRepository
     {
         private readonly string _connectionString;// 資料庫連接字串
+        private readonly IPasswordService _passwordService; // 密碼服務接口
 
         // 构造函数：注入数据库连接字符串（与 PartRepository 一致）
-        public UserRepository(string connectionString)
+        public UserRepository(string connectionString, IPasswordService passwordService)
         {
             _connectionString = connectionString;
+            _passwordService = passwordService;
             /// <summary>
             /// 根据用户名获取用户（用于登录验证）
             /// </summary>
             /// 
         }
+
+
+
+
+
 
         /// <summary>
         /// 根据用户名获取用户（用于登录验证）
@@ -78,16 +87,20 @@ namespace LHP_Inventory_management_system_MVC.Data
 
         public bool ValidateUser(string username, string password)
         {
-            var user = GetUserByUsername(username); // 根據用戶名獲取用戶
-            if (user == null)
-            {
-                return false; // 用戶不存在
-            }
+            var user = GetUserByUsername(username);
+            if (user == null) return false;
 
-            // 2. 将输入密码哈希后与数据库中的 PasswordHash 比对
-            string inputPasswordHash = Hash.ComputeSha256Hash(password);
-            return user.PasswordHash == inputPasswordHash; // 返回比对结果
+            // ✅ 用 PasswordHasher 驗證，不要再用 SHA256 字串比對
+            return _passwordService.VerifyPassword(user.PasswordHash, password);
         }
+        //但 ASP.NET Core 的 PasswordHasher 不是這種東西
+         // PasswordHasher 會：
+        //✅ 自動產生 隨機 salt
+        //✅ 每次 Hash 都會產生不同結果
+        //✅ 把 salt + iteration count + 演算法資訊一起編碼進 hash 字串裡
+
+
+
 
         /// <summary>
         /// 創建帳戶
@@ -95,24 +108,28 @@ namespace LHP_Inventory_management_system_MVC.Data
         ///
         public bool CreateUser(string username, string password)
         {
-            // 1. 检查用户名是否已存在
+            // 1. 檢查用户名是否已存在
             if (GetUserByUsername(username) != null)
             {
                 return false; // 用戶名已存在
             }
 
-            //2.哈希密码
+            //2.哈希密碼
             using (MySqlConnection connection = new MySqlConnection(_connectionString))
             {
                 string sql_query = "INSERT INTO Users (login_user, PasswordHash) VALUES (@username, @passwordHash)";
                 MySqlCommand command = new MySqlCommand(sql_query, connection);
                 command.Parameters.AddWithValue("@username", username);
-                string passwordHash = Hash.ComputeSha256Hash(password);
+                string passwordHash = _passwordService.HashPassword(password); // 使用自訂密碼服務哈希密碼
                 command.Parameters.AddWithValue("@passwordHash", passwordHash);
                 connection.Open();
                 int result = command.ExecuteNonQuery();
                 return result > 0; // 返回插入結果
             }
+
+            //Hash.ComputeSha256Hash 這個缺點是無法使用內建的密碼哈希算法（如 ASP.NET Core Identity 的 PasswordHasher），因此缺乏自動加鹽和適應性哈希功能，這可能會降低安全性。建議改用 ASP.NET Core Identity 的 PasswordHasher 來處理密碼哈希，這樣可以確保更強的安全性和更好的性能。
+
+
         }
 
         /// <summary>
@@ -160,14 +177,14 @@ namespace LHP_Inventory_management_system_MVC.Data
                     }
 
                     // 2. 驗證當前密碼是否正確（使用相同的哈希方法）
-                    string inputCurrentPasswordHash = Hash.ComputeSha256Hash(currentpassword);
+                    string inputCurrentPasswordHash = _passwordService.HashPassword(currentpassword);
                     if (storedPasswordHash != inputCurrentPasswordHash)
                     {
                         return false; // 當前密碼不正確，返回失敗
                     }
 
                     // 3. 哈希新密碼並更新到資料庫
-                    string newPasswordHash = Hash.ComputeSha256Hash(newpassword);
+                    string newPasswordHash = _passwordService.HashPassword(newpassword);
                     string updateQuery = "UPDATE Users SET PasswordHash = @newPasswordHash WHERE login_user = @username";
 
                     using (MySqlCommand command = new MySqlCommand(updateQuery, connection))

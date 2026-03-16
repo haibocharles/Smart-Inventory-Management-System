@@ -54,3 +54,4 @@ D:\C# 學習成果\LHP_Inventory_management_system_MVC\LHP_Inventory_management_
 D:\C# 學習成果\LHP_Inventory_management_system_MVC\LHP_Inventory_management_system_MVC\obj\Debug\net8.0\LHP_Inventory_management_system_MVC.pdb
 D:\C# 學習成果\LHP_Inventory_management_system_MVC\LHP_Inventory_management_system_MVC\obj\Debug\net8.0\LHP_Inventory_management_system_MVC.genruntimeconfig.cache
 D:\C# 學習成果\LHP_Inventory_management_system_MVC\LHP_Inventory_management_system_MVC\obj\Debug\net8.0\ref\LHP_Inventory_management_system_MVC.dll
+D:\C# 學習成果\LHP_Inventory_management_system_mvc\LHP_Inventory_management_system_MVC\obj\Debug\net8.0\LHP_Inventory_management_system_MVC.sourcelink.json

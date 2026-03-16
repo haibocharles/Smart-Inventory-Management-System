@@ -1,4 +1,5 @@
 using LHP_Inventory_management_system_MVC.Data;
+using LHP_Inventory_management_system_MVC.Service;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<IPasswordService, PasswordService>();
 
 //添加登入驗證服務
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -30,11 +32,18 @@ builder.Services.AddSession(options =>
 });
 
 // 配置仓储服务
-var connectionString = "Server=localhost;Database=InventoryManagementSystemDB;Uid=root;Pwd=Aa0925129251;";
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+if (string.IsNullOrWhiteSpace(connectionString))
+    throw new Exception("DefaultConnection is missing in appsettings.json");
 // 註冊所有需要的 Repository
-builder.Services.AddScoped<PartRepository>(provider => new PartRepository(connectionString));
-builder.Services.AddScoped<UserRepository>(provider => new UserRepository(connectionString));
-builder.Services.AddScoped<OrderRepository>(provider => new OrderRepository(connectionString)); // 添加這行
+// Repositories
+builder.Services.AddScoped(sp => new PartRepository(connectionString));
+builder.Services.AddScoped(sp => new OrderRepository(connectionString));
+builder.Services.AddScoped(sp =>
+{
+    var pwd = sp.GetRequiredService<IPasswordService>();
+    return new UserRepository(connectionString!, pwd);
+});
 
 var app = builder.Build();
 

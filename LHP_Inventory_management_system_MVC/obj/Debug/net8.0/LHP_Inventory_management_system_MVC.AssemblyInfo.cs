@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LHP_Inventory_management_system_MVC")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+68b5f5fee6c3a63e5246dd4f6568e0d09ad8a728")]
 [assembly: System.Reflection.AssemblyProductAttribute("LHP_Inventory_management_system_MVC")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LHP_Inventory_management_system_MVC")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

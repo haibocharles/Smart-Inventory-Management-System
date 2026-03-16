@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Security.Claims;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace LHP_Inventory_management_system_MVC.Controllers
 {
@@ -39,14 +41,14 @@ namespace LHP_Inventory_management_system_MVC.Controllers
         {
             ViewData["ReturnUrl"] = returnUrl;
 
-            // 1. 验证输入
+            // 1. 驗證输入
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
-                ModelState.AddModelError(string.Empty, "用户名和密码不能为空");
+                ModelState.AddModelError(string.Empty, "用戶名和密碼不能為空");
                 return View();
             }
 
-            // 2. 验证用户凭据
+            // 2. 驗證用戶憑據
             if (userRepository.ValidateUser(username, password))
             {
                 var user = userRepository.GetUserByUsername(username);
@@ -83,8 +85,10 @@ namespace LHP_Inventory_management_system_MVC.Controllers
                 }
             }
 
-            // 登入施敗
-            ModelState.AddModelError(string.Empty, "Invalid username pr password");
+            // 登入失敗
+            ModelState.AddModelError("username", " ");
+            ModelState.AddModelError("password", " ");
+            ModelState.AddModelError(string.Empty, "Invalid username or password");
             return View();
         }
 
@@ -130,16 +134,18 @@ namespace LHP_Inventory_management_system_MVC.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            // 如果用户已登录，重定向到首页
-            if (HttpContext.Session.GetInt32("UserId") != null)
+            if (User.Identity?.IsAuthenticated == true)
             {
                 return RedirectToAction("Index", "Home");
             }
-
             return View();
         }
 
-
+        [HttpGet]
+        public IActionResult WhoAmI()
+        {
+            return Content($"Auth={User.Identity?.IsAuthenticated}, Name={User.Identity?.Name}");
+        }
         // ================================
         // 安全重定向方法
         // ================================
@@ -160,11 +166,14 @@ namespace LHP_Inventory_management_system_MVC.Controllers
         // ================================
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
-            // 清除会话
-            HttpContext.Session.Clear();
-
+            // 清除會話SignOutAsync() 是最重要的部分，它會：
+            // 移除使用者的身份驗證 Cookie
+            // 清除 User 物件的身份資訊
+            // 確保後續請求不再被視為已驗證
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme); //Cookie authentication 要用 SignOutAsync 才算真正登出。
+            HttpContext.Session.Clear(); // 你若真的有用 session 才留
             // 清除"记住我"Cookie
             Response.Cookies.Delete("RememberMeToken");
 
