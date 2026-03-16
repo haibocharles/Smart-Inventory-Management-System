@@ -121,3 +121,16 @@ LHP_Inventory_management_system_MVC
 │
 ├── appsettings.json
 └── Program.cs
+
+## Screenshots
+
+### Login Page
+<img src="Screenshot/Main_page.png" width="700">
+
+### Dashboard
+<img src="screenshot/Dashboard1.png" width="700">
+<img src="screenshot/Dashboard2.png" width="700">
+### Inventory Transaction
+<img src="screenshot/inventory_management.png" width="700">
+### User Profile
+
