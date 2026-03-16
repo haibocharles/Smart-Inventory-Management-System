@@ -125,7 +125,7 @@ LHP_Inventory_management_system_MVC
 ## Screenshots
 
 ### Main Page
-![Main Page](LHP_Inventory_management_system_MVC/Screenshot/Main_page.png)
+![image](LHP_Inventory_management_system_MVC/Screenshot/Main_page.png)
 
 ### Dashboard
 ![Dashboard](LHP_Inventory_management_system_MVC/Screenshot/Dashboard1.png)
