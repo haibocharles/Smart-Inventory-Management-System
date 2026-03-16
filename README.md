@@ -75,7 +75,7 @@ This improves security awareness in account system development and avoids storin
 ## Screenshots
 
 ### Main Pagee
-![image]((https://github.com/haibocharles/Smart-Inventory-Management-System/blob/main/LHP_Inventory_management_system_MVC/Screenshot/Main_page.png))
+![image]((https://github.com/haibocharles/Smart-Inventory-Management-System/blob/main/LHP_Inventory_management_system_MVC/Screenshot/Main_page.png, width="800")
 
 
 
