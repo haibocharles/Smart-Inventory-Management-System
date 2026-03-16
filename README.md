@@ -125,12 +125,7 @@ LHP_Inventory_management_system_MVC
 ## Screenshots
 
 ### Main Page
-![image](LHP_Inventory_management_system_MVC/Screenshot/Main_page.png)
+<img src="LHP_Inventory_management_system_MVC/Screenshot/Main_page.png" width="800">
 
-### Dashboard
-![Dashboard](LHP_Inventory_management_system_MVC/Screenshot/Dashboard1.png)
-![Dashboard](LHP_Inventory_management_system_MVC/Screenshot/Dashboard2.png)
-### Inventory Transaction
-<img src="screenshot/inventory_management.png" width="700">
-### User Profile
+
 
