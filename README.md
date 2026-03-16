@@ -124,8 +124,8 @@ LHP_Inventory_management_system_MVC
 
 ## Screenshots
 
-### Main Page
-<img src="LHP_Inventory_management_system_MVC/Screenshot/Main_page.png" width="800">
+### Main Pagee
+![Main Page](https://raw.githubusercontent.com/haibocharles/Smart-Inventory-Management-System/main/LHP_Inventory_management_system_MVC/Screenshot/Main_page.png)
 
 
 
