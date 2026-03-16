@@ -76,8 +76,11 @@ This improves security awareness in account system development and avoids storin
 
 ### Main Page
 ![Main Page](LHP_Inventory_management_system_MVC/Screenshot/Main_page.png)
-
-
+### Dashboard
+![Dashboard1](LHP_Inventory_management_system_MVC/Screenshot/Dashboard1.png)
+![Dashboard2](LHP_Inventory_management_system_MVC/Screenshot/Dashboard2.png)
+### Inventory Management
+![InventoryManagement](LHP_Inventory_management_system_MVC/Screenshot/inventory_management.png)
 
 ## Project Structure
 
